@@ -1,0 +1,21 @@
+{
+  "name": "restful-ecommerce",
+  "version": "1.0.0",
+  "description": "Demo resftul apis for e-commerce app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest-api",
+    "expressjs",
+    "apis",
+    "e-commerce"
+  ],
+  "author": "Faisal Khatri",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
