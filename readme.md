@@ -8,6 +8,8 @@ A simple Node E-Commerce application for testing RESTful web services.
 1. Run npm install
 1. Run npm start
 
+APIs are exposed on http://localhost:3004
+
 # API Documentation
 
 ## POST Orders
