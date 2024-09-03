@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const jwt = require('jsonwebtoken');
+
 const port = 3004;
 
 app.listen(port, () => {
@@ -168,4 +170,29 @@ app.delete("/deleteOrder/:id", (req, res) => {
 
   orders.splice(orderIndex, 1);
   res.status(204).send("Order deleted successfully");
+});
+
+app.post('/auth', (req,res) => {
+  const secretKey = 'Secret999#'
+  const {username, password} = req.body;
+
+  if(!username || !password) {
+    return res.status(400).json ({
+      message: "Username and Password is required for authentication!"
+    })
+  }
+
+  if(username === 'admin' && password === 'secretPass123') {
+    const token = jwt.sign({username}, secretKey, {expiresIn: '1h'});
+
+    res.status(201).json({
+      message: "Authentication Successful!",
+      token
+    })
+  } else {
+    res.status(401).json({
+      message: "Authentication Failed! Invalid username or password!"
+    })
+  }
+
 });
