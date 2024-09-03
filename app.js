@@ -187,7 +187,6 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
 });
 
 app.delete("/deleteOrder/:id", (req, res) => {
-  
   const token = req.headers["authorization"];
 
   if (!token) {
@@ -201,19 +200,18 @@ app.delete("/deleteOrder/:id", (req, res) => {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
 
+    const id = parseInt(req.params.id);
+    const orderIndex = orders.findIndex((order) => order.id === id);
 
-  const id = parseInt(req.params.id);
-  const orderIndex = orders.findIndex((order) => order.id === id);
+    if (orderIndex === -1) {
+      return res.status(404).json({
+        message: "No Order found with the given Order Id!!",
+      });
+    }
 
-  if (orderIndex === -1) {
-    return res.status(404).json({
-      message: "No Order found with the given Order Id!!",
-    });
-  }
-
-  orders.splice(orderIndex, 1);
-  res.status(204).send("Order deleted successfully");
-});
+    orders.splice(orderIndex, 1);
+    res.status(204).send("Order deleted successfully");
+  });
 });
 
 app.post("/auth", (req, res) => {

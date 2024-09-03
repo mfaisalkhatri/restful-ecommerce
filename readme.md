@@ -8,13 +8,13 @@ A simple Node E-Commerce application for testing RESTful web services.
 1. Run npm install
 1. Run npm start
 
-APIs are exposed on http://localhost:3004
+APIs are exposed on http://localhost:3004/
 
 # API Documentation
 
 ## POST Orders
 
-This API will allow adding new orders to the cart.
+This API will allow adding new orders.
 
 ```bash
 curl -X POST http://localhost:3004/addOrder \
@@ -126,10 +126,10 @@ curl -X POST http://localhost:3004/addOrder \
 ```
 
 ### Validations
-1. Request Payload should be an array of Objects else 400 Bad request will be shown.
-2. Request Payload should contain the following fields mandatorily: user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt else 400 Bad request will be shown.
-3. "Id" field should be auto incremented when an order is added.
-4. Currently, no check is added for duplicate orders.
+1. Request Payload should be an array of Objects else status code 400 Bad request will be shown
+2. Request Payload should contain the following fields mandatorily: user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt else 400 Bad request will be shown
+3. "Id" field should be auto incremented when an order is added
+4. Currently, no check is added for duplicate orders
 
 
 ## GET All Orders
@@ -255,7 +255,8 @@ Query Parameters
 
 ### Expected Response
 
-Data filtered accordingly to the query parameter supplied in request should be returned in the response as follows: 
+Data filtered according to the query parameter supplied in request should be returned in the response as follows: 
+
 **Status Code : 200**
 
 **Body** 
@@ -278,11 +279,8 @@ Data filtered accordingly to the query parameter supplied in request should be r
 ```
 
 ### Validations
-1. Fetch the records based on `id (order id)`, `product_id`, `user_id` individually or clubbing all the three query parameters with AND condition
-1. When no records are available for the query parameter, the following response should be displayed: 
-
-**Status Code : 404**
-
+1. Fetch the records based on `id (order id)`, `product_id`, `user_id` individually or clubbing all the three query parameters with `AND` condition
+1. When no records are available for the query parameter, then status code 404 should be displayed with the following message in the response: 
 **Response Body**
 ```JSON
 {
@@ -293,20 +291,21 @@ Data filtered accordingly to the query parameter supplied in request should be r
 
 ## PUT - Update Order details
 
-This API will update the order details
+This API will update the order details. It requires Authentication token in the request header that could be taken using the `/auth` API.
 
 ```bash
-curl -X PUT http://localhost:3004/updateOrder/1 \
--H "Content-Type: application/json" \
--d '{
-    "user_id": "12345",
-    "product_id": "98765",
-    "product_name": "Updated Gadget",
-    "product_amount": 120.00,
-    "qty": 3,
-    "tax_amt": 12.00,
-    "total_amt": 372.00
-}'
+curl --location --request PUT 'http://localhost:3004/updateOrder/1' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzI1MzU1MTM0LCJleHAiOjE3MjUzNTg3MzR9.URm8jqhNUPhXjbcDzrbWp7K9RK8boZw-4s1WTtGgnI0' \
+--data '{
+    "user_id": "1",
+    "product_id": "5",
+    "product_name": "Samsung Galaxy S24 Ultra",
+    "product_amount": 14337.00,
+    "qty": 5,
+    "tax_amt": 90.00,
+    "total_amt": 14427.00
+    }'
 ```
 
 ### Request Payload should be an Object
@@ -347,25 +346,39 @@ curl -X PUT http://localhost:3004/updateOrder/1 \
 }
 ```
 ### Validations
-1. Request Payload should contain the following fields mandatorily: user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt else 400 Bad request will be shown.
-2. If Order Id does not exists, then status code 404 will be shown with message "Order not found!" in the response.
-
+1. Request Payload should contain the following fields mandatorily: `user_id`, `product_id`, `product_name`, `product_amount`, `qty`, `tax_amt`, and `total_amt` else 400 Bad request should be displayed.
+2. If `Order Id` does not exists, then status code 404 should be displayed with the following message :
 ```JSON
 {
 "message": "Order not found!" 
 }
 ```
+3. Currently, no check is added for duplicate orders
+4. If Authentication token is not provided, then status code - 403 should be displayed with the following message in response: 
+```JSON
+{
+"message": "Forbidden! Token is missing!",
+}
+```
+5. If token validation fails, then status code - 404 should be displayed with the following message in response:
+```JSON
+{
+  "message": "Failed to authenticate token!",
+}
+```
 
-3. Currently, no check is added for duplicate orders.
 
 ## PATCH - Update Specific Order detail
 
-This API will allow updating specific order detail
+This API will allow updating specific order detail. It requires Authentication token in the request header that could be taken using the `/auth` API.
 
 ```bash
-curl -X PATCH http://localhost:3004/partialUpdateOrder/1 \
--H "Content-Type: application/json" \
--d '{"product_name": "iPhone 15 Pro Max"}'
+curl --location --request PATCH 'http://localhost:3004/partialUpdateOrder/1' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzI1MzU1MTM0LCJleHAiOjE3MjUzNTg3MzR9.URm8jqhNUPhXjbcDzrbWp7K9RK8boZw-4s1WTtGgnI0' \
+--data '{
+    "product_name": "iPhone 15 Pro Max"
+}'
 ```
 
 ### Request Payload should be an Object
@@ -401,20 +414,34 @@ Any specific detail of the order can be updated using this API
 ```
 
 ### Validations
-1. Any valid field of the Order can be updated using this API.
-2. If Order Id does not exists, then status code 404 will be shown with following message in the response
+1. Any valid field of the Order can be updated using this API
+2. If `Order Id` does not exists, then status code 404 should be displayed with following message in the response
 ```JSON 
 {
     "message": "Order not found!"
 }
 ```
+3. Currently, no check is added for duplicate orders.
+4. If Authentication token is not provided, then status code 403 should be displayed with the following message in response: 
+```JSON
+{
+"message": "Forbidden! Token is missing!",
+}
+```
+5. If token validation fails, then status code - 404 should be displayed with the following message in response:
+```JSON
+{
+  "message": "No Order found with the given Order Id!!",
+}
+```
 
 ## DELETE Order
 
-This API will delete the order of the given Order Id
+This API will delete the order of the given Order Id. It requires Authentication token in the request header that could be taken using the `/auth` API.
 
 ```bash
-curl -X DELETE http://localhost:3004/deleteOrder/1
+curl --location --request DELETE 'http://localhost:3004/deleteOrder/1' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzI1MzU1MTM0LCJleHAiOjE3MjUzNTg3MzR9.URm8jqhNUPhXjbcDzrbWp7K9RK8boZw-4s1WTtGgnI0'
 ```
 ### Expected Response
 
@@ -425,10 +452,22 @@ curl -X DELETE http://localhost:3004/deleteOrder/1
 
 ### Validations
 1. Any valid Order id can be deleted.
-2. If Order Id does not exists, then status code 404 will be shown with following message in the response
+2. If `Order Id` does not exists, then status code - 404 should be displayed with following message in the response
 ```JSON 
 {
     "message": "Order not found!"
+}
+```
+3. If Authentication token is not provided, then status code - 403 should be displayed with the following message in response: 
+```JSON
+{
+"message": "Forbidden! Token is missing!",
+}
+```
+4. If token validation fails, then status code - 404 should be displayed with the following message in response:
+```JSON
+{
+  "message": "No Order found with the given Order Id!!",
 }
 ```
 
@@ -464,21 +503,17 @@ curl --location 'http://localhost:3004/auth' \
 ```
 
 ### Validations
-1. Username and Password are mandatory fields in the request payload.
-2. If username or password fields are not supplied, 400 status code will be displayed with the following message: 
+1. `username` and `password` are mandatory fields in the request payload.
+2. If `username` or `password` fields are not supplied, then status code - 400 should be displayed with the following message: 
 ```JSON
 {
     "message": "Username and Password is required for authentication!"
 }
 ```
-3. If username and password does not match, authentication will fail with status code - 401 and following message 
+3. If `username` and `password` does not match, authentication will fail with status code - 401 and following message 
 
 ```JSON
 {
  "message": "Authentication Failed! Invalid username or password!"
 }
 ```
-
-
-
-
