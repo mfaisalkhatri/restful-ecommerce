@@ -1,4 +1,4 @@
-# Restful ECommerce
+# Restful E-Commerce
 
 A simple Node E-Commerce application for testing RESTful web services.
 
@@ -431,4 +431,54 @@ curl -X DELETE http://localhost:3004/deleteOrder/1
     "message": "Order not found!"
 }
 ```
+
+## Create Token
+
+This API will create a fresh token using the following credentials that needs to be supplied in the payload:
+
+```JSON
+{
+    "username": "admin",
+    "password": "secretPass123"
+}
+
+```
+
+```bash
+curl --location 'http://localhost:3004/auth' \
+--header 'Content-Type: application/json' \
+--data '{"username": "admin", "password": "secretPass123"}'
+```
+
+### Expected Response
+
+**Status Code : 201**
+
+**Body** 
+
+```JSON
+{
+    "message": "Authentication Successful!",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzI1MzQyOTAwLCJleHAiOjE3MjUzNDY1MDB9.H5NrylQbqu3TAnqRNCOUE1pG25viLMmyfBf7gTVet-g"
+}
+```
+
+### Validations
+1. Username and Password are mandatory fields in the request payload.
+2. If username or password fields are not supplied, 400 status code will be displayed with the following message: 
+```JSON
+{
+    "message": "Username and Password is required for authentication!"
+}
+```
+3. If username and password does not match, authentication will fail with status code - 401 and following message 
+
+```JSON
+{
+ "message": "Authentication Failed! Invalid username or password!"
+}
+```
+
+
+
 
