@@ -187,6 +187,21 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
 });
 
 app.delete("/deleteOrder/:id", (req, res) => {
+  
+  const token = req.headers["authorization"];
+
+  if (!token) {
+    return res.status(403).json({
+      message: "Forbidden! Token is missing!",
+    });
+  }
+
+  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(400).json({ message: "Failed to authenticate token!" });
+    }
+
+
   const id = parseInt(req.params.id);
   const orderIndex = orders.findIndex((order) => order.id === id);
 
@@ -198,6 +213,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
 
   orders.splice(orderIndex, 1);
   res.status(204).send("Order deleted successfully");
+});
 });
 
 app.post("/auth", (req, res) => {
