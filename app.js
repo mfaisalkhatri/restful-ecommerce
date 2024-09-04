@@ -19,7 +19,7 @@ app.post("/addOrder", (req, res) => {
 
   if (!Array.isArray(orderArray)) {
     return res.status(400).json({
-      message: "Request Payload must be an array of orders.",
+      message: "Request Payload must be an array of orders!",
     });
   }
 
@@ -35,7 +35,7 @@ app.post("/addOrder", (req, res) => {
     ) {
       return res.status(400).json({
         message:
-          "Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt",
+          "Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!",
       });
     }
 
