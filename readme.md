@@ -5,10 +5,12 @@ A simple Node E-Commerce application for testing RESTful web services.
 # Installation 
 1. Clone the repo
 1. Navigate into the restful-ecommerce root folder
-1. Run npm install
-1. Run npm start
+1. Run `npm install`
+1. Run `npm start`
 
 APIs are exposed on http://localhost:3004/
+
+Swagger is exposed on http://localhost:3004/api-docs
 
 # API Documentation
 

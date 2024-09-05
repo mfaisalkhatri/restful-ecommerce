@@ -5,7 +5,7 @@ const { swaggerUi, swaggerSpec } = require("./swagger");
 
 const port = 3004;
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
@@ -235,7 +235,7 @@ app.put("/updateOrder/:id", (req, res) => {
     });
   }
 
-  jwt.verify(token.replace('Bearer ', ''), SECRET_KEY, (err, decoded) => {
+  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
@@ -315,7 +315,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
     });
   }
 
-  jwt.verify(token.replace('Bearer ', ''), SECRET_KEY, (err, decoded) => {
+  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
@@ -357,7 +357,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
  *     summary: Delete an order by ID
  *     tags: [Orders]
  *     security:
- *       - bearerAuth: [] 
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -384,7 +384,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
     });
   }
 
-  jwt.verify(token.replace('Bearer ', ''), SECRET_KEY, (err, decoded) => {
+  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
