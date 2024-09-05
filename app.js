@@ -1,17 +1,11 @@
-
 import express from "express";
 import jwt from "jsonwebtoken";
-
-const express = require("express");
-const app = express();
-const jwt = require("jsonwebtoken");
-const { swaggerUi, swaggerSpec } = require("./swagger");
+import {swaggerUi, swaggerSpec} from "./swagger.js";
 
 const app = express();
 const port = 3004;
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
