@@ -74,7 +74,8 @@ const SECRET_KEY = "Secret999#";
  *       201:
  *         description: Orders added successfully
  *       400:
- *         description: Bad request, invalid order data
+ *         description: "Request Payload must be an array of orders \n\n
+ *                      Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt"
  */
 app.post("/addOrder", (req, res) => {
   const orderArray = req.body;
