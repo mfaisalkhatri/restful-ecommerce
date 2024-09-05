@@ -4,6 +4,7 @@ import orderObject from '../testdata/neworder_only_object.json' with { type: "js
 import missingFieldsOrder from '../testdata/neworder_field_missing.json' with { type: "json" }
 import authCredentials from '../testdata/auth_credentials.json' with {type: "json"}
 import updateOrder from '../testdata/update_order.json' with {type: "json"}
+import missingFieldInUpdateOrder from '../testdata/update_order_field_missing.json' with {type: "json"}
 import {expect} from 'chai';
 
 
@@ -126,7 +127,6 @@ describe('Unit Tests of E-Commerce application', () => {
 
 	it('should return the order with multiple filter queries with status code 200', async() =>{
 		let response = await request(baseurl).get('/getOrder').query({id: 3, user_id: 2, product_id: 2});
-		console.log(response);
 		expect(response.statusCode).to.be.equal(200);
 		expect(response.body.message).to.be.equal('Order found!!');
 		expect(response.body.orders.length).to.be.above(0);
@@ -210,12 +210,34 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.body.order.total_amt).to.be.equal(26960.98);
 	});
 
-	it('should not update the Order when authorization token is missing in the update request', async() => {
+	it('should not update the order when authorization token is missing in the update request and return status code 403', async() => {
 
 		let response = await request (baseurl).put('/updateOrder/2').send(updateOrder);
 		expect(response.statusCode).to.be.equal(403);
 		expect(response.body.message).to.be.equal('Forbidden! Token is missing!');
 	});
 	
+	it('should not update the order when authorization token is invalid and return status code 400', async() => {
+
+		let response = await request (baseurl).put('/updateOrder/2')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', 'invalidtokenuyiy234sdf')
+		.send(updateOrder);
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Failed to authenticate token!');
+	});
+
+	it('should not update the order when a field is missing from request body and return status code 400', async() => {
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request (baseurl).put('/updateOrder/2')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', authResponse.body.token)
+		.send(missingFieldInUpdateOrder);
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!');
+
+	});
+
 
 });

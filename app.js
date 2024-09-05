@@ -222,7 +222,10 @@ app.get("/getOrder", (req, res) => {
  *       200:
  *         description: Order updated successfully
  *       400:
- *         description: Bad request, invalid token or order data
+ *         description: "Failed to authenticate token! \n\n
+ *                       Invalid request, no data provided to update!"
+ *       403:
+ *         description: Forbidden! Token is missing!
  *       404:
  *         description: No order found with the given ID
  */
