@@ -5,7 +5,8 @@ const { swaggerUi, swaggerSpec } = require("./swagger");
 
 const port = 3004;
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
