@@ -1,13 +1,12 @@
-<<<<<<< HEAD
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "Orders API",
+    title: "Restful E-Commerce",
     version: "1.0.0",
-    description: "An API to manage orders with authentication",
+    description: "A simple Node E-Commerce application for testing RESTful web services",
   },
   servers: [
     {
