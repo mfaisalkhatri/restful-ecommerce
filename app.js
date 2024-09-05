@@ -278,7 +278,9 @@ app.put("/updateOrder/:id", (req, res) => {
  * /partialUpdateOrder/{id}:
  *   patch:
  *     summary: Partially update an order by ID
- *     tags: [Orders, Auth]
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -286,12 +288,6 @@ app.put("/updateOrder/:id", (req, res) => {
  *           type: integer
  *         required: true
  *         description: The ID of the order
- *       - in: header
- *         name: auth
- *         schema:
- *            type: string
- *         required: true
- *         description: an authorization header
  *     requestBody:
  *       required: true
  *       content:
@@ -319,7 +315,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
     });
   }
 
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+  jwt.verify(token.replace('Bearer ', ''), SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
@@ -359,7 +355,9 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
  * /deleteOrder/{id}:
  *   delete:
  *     summary: Delete an order by ID
- *     tags: [Orders, Auth]
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -367,12 +365,6 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
  *           type: integer
  *         required: true
  *         description: The ID of the order
-*       - in: header
- *         name: auth
- *         schema:
- *            type: string
- *         required: true
- *         description: an authorization header
  *     responses:
  *       204:
  *         description: Order deleted successfully, nothing is returned in response.
@@ -392,7 +384,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
     });
   }
 
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+  jwt.verify(token.replace('Bearer ', ''), SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
