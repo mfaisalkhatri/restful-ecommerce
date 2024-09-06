@@ -1,12 +1,11 @@
-const express = require("express");
-const app = express();
-const jwt = require("jsonwebtoken");
-const { swaggerUi, swaggerSpec } = require("./swagger");
+import express from "express";
+import jwt from "jsonwebtoken";
+import {swaggerUi, swaggerSpec} from "./swagger.js";
 
+const app = express();
 const port = 3004;
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
@@ -82,7 +81,7 @@ app.post("/addOrder", (req, res) => {
 
   if (!Array.isArray(orderArray)) {
     return res.status(400).json({
-      message: "Request Payload must be an array of orders.",
+      message: "Request Payload must be an array of orders!",
     });
   }
 
@@ -223,7 +222,10 @@ app.get("/getOrder", (req, res) => {
  *       200:
  *         description: Order updated successfully
  *       400:
- *         description: Bad request, invalid token or order data
+ *         description: "Failed to authenticate token! \n\n
+ *                       Invalid request, no data provided to update!"
+ *       403:
+ *         description: Forbidden! Token is missing!
  *       404:
  *         description: No order found with the given ID
  */
@@ -246,7 +248,7 @@ app.put("/updateOrder/:id", (req, res) => {
     const orderIndex = orders.findIndex((order) => order.id === id);
     if (orderIndex === -1) {
       return res.status(404).json({
-        message: "No Order found with the given Order Id!!",
+        message: "No Order found with the given Order Id!",
       });
     }
 
@@ -268,7 +270,7 @@ app.put("/updateOrder/:id", (req, res) => {
     orders[orderIndex] = { id: id, ...updatedDetails };
 
     res.status(200).json({
-      message: "Order updated successfully!!",
+      message: "Order updated successfully!",
       order: orders[orderIndex],
     });
   });
@@ -305,7 +307,7 @@ app.put("/updateOrder/:id", (req, res) => {
  *       403:
  *         description: Forbidden! Token is missing!
  *       404:
- *         description: Order not found with the given Order Id!
+ *         description: No Order found with the given Order Id!
  */
 app.patch("/partialUpdateOrder/:id", (req, res) => {
   const token = req.headers["authorization"];
@@ -334,7 +336,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
 
     if (!order) {
       return res.status(404).json({
-        message: "Order not found with the given Order Id!",
+        message: "No Order found with the given Order Id!",
       });
     }
 
@@ -395,7 +397,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
 
     if (orderIndex === -1) {
       return res.status(404).json({
-        message: "No Order found with the given Order Id!!",
+        message: "No Order found with the given Order Id!",
       });
     }
 

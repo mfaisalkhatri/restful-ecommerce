@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha **/*.spec.js && mocha --reporter json > reports/test-results.json",
+    "report": "mocha --reporter mochawesome"
   },
+    "type": "module",
   "keywords": [
     "rest-api",
     "expressjs",
@@ -16,8 +18,12 @@
   "author": "Faisal Khatri",
   "license": "ISC",
   "dependencies": {
+    "chai": "^5.1.1",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mocha": "^10.7.3",
+    "mochawesome": "^7.1.3",
+    "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }

@@ -1,0 +1,9 @@
+{
+    "user_id": "1",
+    "product_id": "1",
+    "product_name": "Washing Machine",
+    "product_amount": 300.00,
+    "qty": 5,
+    "tax_amt": 15.99,
+    "total_amt": 315.99
+}
