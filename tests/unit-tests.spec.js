@@ -200,7 +200,7 @@ describe('Unit Tests of E-Commerce application', () => {
 		.set('Authorization', authResponse.body.token)
 		.send(updateOrder);
 		expect(response.statusCode).to.be.equal(200);
-		expect(response.body.message).to.be.equal('Order updated successfully!!');
+		expect(response.body.message).to.be.equal('Order updated successfully!');
 		expect(response.body.order.user_id).to.be.equal('3');
 		expect(response.body.order.product_id).to.be.equal('7');
 		expect(response.body.order.product_name).to.be.equal('Samsung Android Television');
@@ -208,6 +208,19 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.body.order.qty).to.be.equal(3);
 		expect(response.body.order.tax_amt).to.be.equal(1283.98);
 		expect(response.body.order.total_amt).to.be.equal(26960.98);
+	});
+
+	it('should return 404 when order with the given id is not found for update', async() => {
+
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request (baseurl).put('/updateOrder/90')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', authResponse.body.token)
+		.send(updateOrder);
+		expect(response.statusCode).to.be.equal(404);
+		expect(response.body.message).to.be.equal('No Order found with the given Order Id!');
+
 	});
 
 	it('should not update the order when authorization token is missing in the update request and return status code 403', async() => {
@@ -239,5 +252,104 @@ describe('Unit Tests of E-Commerce application', () => {
 
 	});
 
+	it('should update the order partially and return status code 200 ', async() => {
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
 
+		let response = await request (baseurl).patch('/partialUpdateOrder/2')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', authResponse.body.token)
+		.send({"tax_amt": 60.77, "total_amt": 25740.44});
+		expect(response.statusCode).to.be.equal(200);
+		expect(response.body.message).to.be.equal('Order updated successfully!');
+		expect(response.body.order.user_id).to.be.equal('3');
+		expect(response.body.order.product_id).to.be.equal('7');
+		expect(response.body.order.product_name).to.be.equal('Samsung Android Television');
+		expect(response.body.order.product_amount).to.be.equal(8559.89);
+		expect(response.body.order.qty).to.be.equal(3);
+		expect(response.body.order.tax_amt).to.be.equal(60.77);
+		expect(response.body.order.total_amt).to.be.equal(25740.44);
+	});
+
+	it('should return 404 when order with the given id is not found for partial update', async() => {
+
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request (baseurl).patch('/partialUpdateOrder/90')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', authResponse.body.token)
+		.send({"tax_amt": 60.77, "total_amt": 25740.44});
+
+		expect(response.statusCode).to.be.equal(404);
+		expect(response.body.message).to.be.equal('No Order found with the given Order Id!');
+
+	});
+
+	it('should not update the partial order when authorization token is missing in the update request and return status code 403', async() => {
+
+		let response = await request (baseurl).patch('/partialUpdateOrder/3').send({"user_id": 5});
+		expect(response.statusCode).to.be.equal(403);
+		expect(response.body.message).to.be.equal('Forbidden! Token is missing!');
+	});
+	
+	it('should not update the partial order when authorization token is invalid and return status code 400', async() => {
+
+		let response = await request (baseurl).patch('/partialUpdateOrder/3')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', 'invalidtokenuyiy234sdf')
+		.send({"total_amt": 25500.99});
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Failed to authenticate token!');
+	});
+
+	it('should not update the partial order when no data is provided in the request body, and return status code 400', async() => {
+		
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request (baseurl).patch('/partialUpdateOrder/3')
+		.set('Content-Type', 'application/json')
+		.set('Authorization', authResponse.body.token)
+		.send({ });
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Invalid request, no data provided to update!');
+	});
+
+	it('should delete an order with correct order id and valid token and return status code 204', async() => {
+		
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request (baseurl).delete('/deleteOrder/4')
+		.set('Authorization', authResponse.body.token);
+		
+		expect(response.statusCode).to.be.equal(204);
+	});
+
+	it('should not delete an order and return status code 403 when authorization token is missing in the header', async() => {
+
+		let response = await request (baseurl).delete('/deleteOrder/2');
+
+		expect(response.statusCode).to.be.equal(403);
+		expect(response.body.message).to.be.equal('Forbidden! Token is missing!');
+
+	});
+
+	it('should not delete an order and return status code 400 when authorization token is in invalid format', async() => {
+
+		let response = await request (baseurl).delete('/deleteOrder/2')
+		.set('Authorization', 'invalidtokenuyiy234sdf')
+
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Failed to authenticate token!');
+
+	});
+
+	it('should not delete an order and return status code 404 when no order is found for the order id', async() => {
+
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request (baseurl).delete('/deleteOrder/50')
+		.set('Authorization', authResponse.body.token);
+
+		expect(response.statusCode).to.be.equal(404);
+		expect(response.body.message).to.be.equal('No Order found with the given Order Id!');
+	});
 });

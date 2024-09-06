@@ -248,7 +248,7 @@ app.put("/updateOrder/:id", (req, res) => {
     const orderIndex = orders.findIndex((order) => order.id === id);
     if (orderIndex === -1) {
       return res.status(404).json({
-        message: "No Order found with the given Order Id!!",
+        message: "No Order found with the given Order Id!",
       });
     }
 
@@ -270,7 +270,7 @@ app.put("/updateOrder/:id", (req, res) => {
     orders[orderIndex] = { id: id, ...updatedDetails };
 
     res.status(200).json({
-      message: "Order updated successfully!!",
+      message: "Order updated successfully!",
       order: orders[orderIndex],
     });
   });
@@ -307,7 +307,7 @@ app.put("/updateOrder/:id", (req, res) => {
  *       403:
  *         description: Forbidden! Token is missing!
  *       404:
- *         description: Order not found with the given Order Id!
+ *         description: No Order found with the given Order Id!
  */
 app.patch("/partialUpdateOrder/:id", (req, res) => {
   const token = req.headers["authorization"];
@@ -336,7 +336,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
 
     if (!order) {
       return res.status(404).json({
-        message: "Order not found with the given Order Id!",
+        message: "No Order found with the given Order Id!",
       });
     }
 
@@ -397,7 +397,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
 
     if (orderIndex === -1) {
       return res.status(404).json({
-        message: "No Order found with the given Order Id!!",
+        message: "No Order found with the given Order Id!",
       });
     }
 
