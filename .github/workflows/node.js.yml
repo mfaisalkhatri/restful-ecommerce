@@ -13,9 +13,11 @@ on:
       - main
       - issue-*
 jobs:
-  build:
+  build_and_test:
 
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
 
     strategy:
       matrix:
