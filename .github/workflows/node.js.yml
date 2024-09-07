@@ -30,7 +30,7 @@ jobs:
       run: npm start && npx wait-on http://localhost:3004 & 
 
     - name: Run the tests
-      run: node --trace-warnings & npm test
+      run: npm test
 
     - name: Kill all instances of node
       run: killall node
