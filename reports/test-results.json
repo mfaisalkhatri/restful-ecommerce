@@ -5,16 +5,16 @@
     "passes": 28,
     "pending": 0,
     "failures": 6,
-    "start": "2024-09-07T10:04:51.757Z",
-    "end": "2024-09-07T10:04:51.806Z",
-    "duration": 49
+    "start": "2024-09-07T13:31:12.820Z",
+    "end": "2024-09-07T13:31:12.870Z",
+    "duration": 50
   },
   "tests": [
     {
       "title": "should return status code 404 as no order exists",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 404 as no order exists",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 8,
+      "duration": 9,
       "currentRetry": 0,
       "err": {
         "stack": "AssertionError: expected 200 to equal 404\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:16:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
@@ -38,7 +38,7 @@
       "title": "should return status code 400 with message for fields missing in order",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 400 with message for fields missing in order",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -95,7 +95,7 @@
       "title": "should filter and fetch order on user_id with status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on user_id with status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {
         "stack": "AssertionError: expected '1' to equal '2'\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:99:52)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
@@ -161,7 +161,7 @@
       "title": "should generate the valid token with status code 201 ",
       "fullTitle": "Unit Tests of E-Commerce application should generate the valid token with status code 201 ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -170,7 +170,7 @@
       "title": "should not generate the token and return status code 401 when invalid credentials are supplied ",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when invalid credentials are supplied ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -179,7 +179,7 @@
       "title": "should not generate the token and return status code 401 when only username is provided and password is missing",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when only username is provided and password is missing",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -215,7 +215,7 @@
       "title": "should not generate the token and return status code 401 when both username and password is blank",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when both username and password is blank",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -233,7 +233,7 @@
       "title": "should return 404 when order with the given id is not found for update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -242,7 +242,7 @@
       "title": "should not update the order when authorization token is missing in the update request and return status code 403",
       "fullTitle": "Unit Tests of E-Commerce application should not update the order when authorization token is missing in the update request and return status code 403",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -260,7 +260,7 @@
       "title": "should not update the order when a field is missing from request body and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the order when a field is missing from request body and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -269,7 +269,7 @@
       "title": "should update the order partially and return status code 200 ",
       "fullTitle": "Unit Tests of E-Commerce application should update the order partially and return status code 200 ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -278,7 +278,7 @@
       "title": "should return 404 when order with the given id is not found for partial update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for partial update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -287,7 +287,7 @@
       "title": "should not update the partial order when authorization token is missing in the update request and return status code 403",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when authorization token is missing in the update request and return status code 403",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -296,7 +296,7 @@
       "title": "should not update the partial order when authorization token is invalid and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when authorization token is invalid and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -305,7 +305,7 @@
       "title": "should not update the partial order when no data is provided in the request body, and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when no data is provided in the request body, and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -329,7 +329,7 @@
       "title": "should not delete an order and return status code 403 when authorization token is missing in the header",
       "fullTitle": "Unit Tests of E-Commerce application should not delete an order and return status code 403 when authorization token is missing in the header",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -338,7 +338,7 @@
       "title": "should not delete an order and return status code 400 when authorization token is in invalid format",
       "fullTitle": "Unit Tests of E-Commerce application should not delete an order and return status code 400 when authorization token is in invalid format",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -359,7 +359,7 @@
       "title": "should return status code 404 as no order exists",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 404 as no order exists",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 8,
+      "duration": 9,
       "currentRetry": 0,
       "err": {
         "stack": "AssertionError: expected 200 to equal 404\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:16:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
@@ -404,7 +404,7 @@
       "title": "should filter and fetch order on user_id with status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on user_id with status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {
         "stack": "AssertionError: expected '1' to equal '2'\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:99:52)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
@@ -460,7 +460,7 @@
       "title": "should return status code 400 with message for fields missing in order",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 400 with message for fields missing in order",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -523,7 +523,7 @@
       "title": "should generate the valid token with status code 201 ",
       "fullTitle": "Unit Tests of E-Commerce application should generate the valid token with status code 201 ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -532,7 +532,7 @@
       "title": "should not generate the token and return status code 401 when invalid credentials are supplied ",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when invalid credentials are supplied ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -541,7 +541,7 @@
       "title": "should not generate the token and return status code 401 when only username is provided and password is missing",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when only username is provided and password is missing",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -577,7 +577,7 @@
       "title": "should not generate the token and return status code 401 when both username and password is blank",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when both username and password is blank",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -595,7 +595,7 @@
       "title": "should return 404 when order with the given id is not found for update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -604,7 +604,7 @@
       "title": "should not update the order when authorization token is missing in the update request and return status code 403",
       "fullTitle": "Unit Tests of E-Commerce application should not update the order when authorization token is missing in the update request and return status code 403",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -622,7 +622,7 @@
       "title": "should not update the order when a field is missing from request body and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the order when a field is missing from request body and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -631,7 +631,7 @@
       "title": "should update the order partially and return status code 200 ",
       "fullTitle": "Unit Tests of E-Commerce application should update the order partially and return status code 200 ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -640,7 +640,7 @@
       "title": "should return 404 when order with the given id is not found for partial update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for partial update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -649,7 +649,7 @@
       "title": "should not update the partial order when authorization token is missing in the update request and return status code 403",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when authorization token is missing in the update request and return status code 403",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -658,7 +658,7 @@
       "title": "should not update the partial order when authorization token is invalid and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when authorization token is invalid and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -667,7 +667,7 @@
       "title": "should not update the partial order when no data is provided in the request body, and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when no data is provided in the request body, and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -676,7 +676,7 @@
       "title": "should not delete an order and return status code 403 when authorization token is missing in the header",
       "fullTitle": "Unit Tests of E-Commerce application should not delete an order and return status code 403 when authorization token is missing in the header",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -685,7 +685,7 @@
       "title": "should not delete an order and return status code 400 when authorization token is in invalid format",
       "fullTitle": "Unit Tests of E-Commerce application should not delete an order and return status code 400 when authorization token is in invalid format",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}

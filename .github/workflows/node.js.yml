@@ -36,8 +36,12 @@ jobs:
 
     - name: Install the dependencies
       run: npm ci
+
     - name: Build the app and run the tests
       run: npm start && npx wait-on http://localhost:3004 & npm test
+
+    - name: stop all instances of node
+      run: killall node
     
     - name: Test Report
       uses: dorny/test-reporter@v1
@@ -46,3 +50,5 @@ jobs:
           name: Test Results        
           path: ${{ github.workspace }}/reports/test-results.json
           reporter: 'mocha-json'
+
+    
