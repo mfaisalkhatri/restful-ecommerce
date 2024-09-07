@@ -35,7 +35,7 @@ jobs:
         cache: 'npm'
 
     - name: Build the App
-      run: npm ci & npm build --if-present & npm start & npx wait-on http://localhost:3004
+      run: npm ci & npm start & npx wait-on http://localhost:3004
 
     - name: Unit Test
       run: npm test
