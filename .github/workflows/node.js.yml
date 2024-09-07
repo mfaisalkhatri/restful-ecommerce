@@ -37,7 +37,7 @@ jobs:
     - name: Install the dependencies
       run: npm ci
     - name: Build the app and run the tests
-      run: npm start && npx wait-on http://localhost:3004 && npm test
+      run: npm start && npx wait-on http://localhost:3004 & npm test
     
     - name: Test Report
       uses: dorny/test-reporter@v1
