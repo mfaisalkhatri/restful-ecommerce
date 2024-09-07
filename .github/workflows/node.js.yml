@@ -13,7 +13,7 @@ on:
       - main
       - issue-*
 jobs:
-  start:
+  Build_and_Test:
 
     runs-on: ubuntu-latest
     permissions:
@@ -33,10 +33,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        ci: npm ci
-        build: npm build --if-present
-        start: npm start
-        wait-on: 'http://localhost:3004'
+
+    - name: Build the App
+      run: npm ci & npm build --if-present & npm start & npx wait-on http://localhost:3004
 
     - name: Unit Test
       run: npm test
