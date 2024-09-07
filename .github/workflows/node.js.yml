@@ -31,10 +31,7 @@ jobs:
 
     - name: Run the tests
       run: npm test
-
-    - name: Generate reporter
-      run: npm run mocha-report
-      
+  
     - name: Kill all instances of node
       run: killall node
 
