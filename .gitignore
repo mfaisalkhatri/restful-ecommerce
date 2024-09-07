@@ -9,6 +9,7 @@ node_modules
 *.iml
 *.ipr
 /.idea/
+/mochawesome-report/
 
 ### VS Code ###
 .vscode/
