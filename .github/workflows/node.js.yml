@@ -13,29 +13,41 @@ on:
       - main
       - issue-*
 jobs:
-  start:
-    runs-on: ubuntu-22.04
+  Build_App_and_Run_Tests:
+
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Build Restful e-commerce App
-        uses: ./
-        with:
-          build: npm ci
-          start: npm start
-          wait-on: 'http://localhost:3004'
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
-      - name: Run Unit Tests
-        run: npm test
+    - name: Install the dependencies
+      run: npm ci
 
-      - name: stop all instances of node
-        run: killall node
+    - name: Build the app and run the tests
+      run: npm start && npx wait-on http://localhost:3004 & 
+
+    - name: Run the tests
+      run: npm test
     
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
           name: Test Results        
           path: ${{ github.workspace }}/reports/test-results.json
           reporter: 'mocha-json'
