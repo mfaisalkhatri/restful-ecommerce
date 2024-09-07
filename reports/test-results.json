@@ -2,34 +2,28 @@
   "stats": {
     "suites": 1,
     "tests": 34,
-    "passes": 28,
+    "passes": 34,
     "pending": 0,
-    "failures": 6,
-    "start": "2024-09-07T14:30:07.831Z",
-    "end": "2024-09-07T14:30:07.879Z",
-    "duration": 48
+    "failures": 0,
+    "start": "2024-09-07T14:32:54.784Z",
+    "end": "2024-09-07T14:32:54.848Z",
+    "duration": 64
   },
   "tests": [
     {
       "title": "should return status code 404 as no order exists",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 404 as no order exists",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 8,
+      "duration": 12,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 200 to equal 404\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:16:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 200 to equal 404",
-        "actual": "200",
-        "expected": "404",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return status code 400 for invalid order format",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 400 for invalid order format",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 7,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -38,7 +32,7 @@
       "title": "should return status code 400 with message for fields missing in order",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 400 with message for fields missing in order",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -49,29 +43,17 @@
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
       "duration": 1,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 7 to equal 4\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:42:45)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 7 to equal 4",
-        "actual": "7",
-        "expected": "4",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should get all available orders successfully with status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should get all available orders successfully with status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 7 to equal 4\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:55:45)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 7 to equal 4",
-        "actual": "7",
-        "expected": "4",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should filter and fetch order on order id with status code 200",
@@ -86,7 +68,7 @@
       "title": "should filter and fetch order on product_id with status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on product_id with status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -95,16 +77,10 @@
       "title": "should filter and fetch order on user_id with status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on user_id with status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected '1' to equal '2'\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:99:52)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected '1' to equal '2'",
-        "actual": "1",
-        "expected": "2",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return 404 status code when query no records are found for the order id filter",
@@ -112,14 +88,8 @@
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
       "duration": 1,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 200 to equal 404\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:109:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 200 to equal 404",
-        "actual": "200",
-        "expected": "404",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return 404 status code when query no records are found for the user id filter",
@@ -161,7 +131,7 @@
       "title": "should generate the valid token with status code 201 ",
       "fullTitle": "Unit Tests of E-Commerce application should generate the valid token with status code 201 ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -206,7 +176,7 @@
       "title": "should not generate the token and return status code 401 when password is blank",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when password is blank",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -215,7 +185,7 @@
       "title": "should not generate the token and return status code 401 when both username and password is blank",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when both username and password is blank",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -224,7 +194,7 @@
       "title": "should update the order successfully and return status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should update the order successfully and return status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 3,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -233,7 +203,7 @@
       "title": "should return 404 when order with the given id is not found for update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -278,7 +248,7 @@
       "title": "should return 404 when order with the given id is not found for partial update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for partial update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -296,7 +266,7 @@
       "title": "should not update the partial order when authorization token is invalid and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when authorization token is invalid and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -305,7 +275,7 @@
       "title": "should not update the partial order when no data is provided in the request body, and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when no data is provided in the request body, and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -314,16 +284,10 @@
       "title": "should delete an order with correct order id and valid token and return status code 204",
       "fullTitle": "Unit Tests of E-Commerce application should delete an order with correct order id and valid token and return status code 204",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 404 to equal 204\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:323:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 404 to equal 204",
-        "actual": "404",
-        "expected": "204",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should not delete an order and return status code 403 when authorization token is missing in the header",
@@ -354,104 +318,22 @@
     }
   ],
   "pending": [],
-  "failures": [
+  "failures": [],
+  "passes": [
     {
       "title": "should return status code 404 as no order exists",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 404 as no order exists",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 8,
+      "duration": 12,
       "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 200 to equal 404\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:16:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 200 to equal 404",
-        "actual": "200",
-        "expected": "404",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
+      "speed": "fast",
+      "err": {}
     },
-    {
-      "title": "should create orders and return status code 201",
-      "fullTitle": "Unit Tests of E-Commerce application should create orders and return status code 201",
-      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
-      "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 7 to equal 4\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:42:45)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 7 to equal 4",
-        "actual": "7",
-        "expected": "4",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
-    },
-    {
-      "title": "should get all available orders successfully with status code 200",
-      "fullTitle": "Unit Tests of E-Commerce application should get all available orders successfully with status code 200",
-      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
-      "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 7 to equal 4\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:55:45)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 7 to equal 4",
-        "actual": "7",
-        "expected": "4",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
-    },
-    {
-      "title": "should filter and fetch order on user_id with status code 200",
-      "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on user_id with status code 200",
-      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
-      "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected '1' to equal '2'\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:99:52)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected '1' to equal '2'",
-        "actual": "1",
-        "expected": "2",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
-    },
-    {
-      "title": "should return 404 status code when query no records are found for the order id filter",
-      "fullTitle": "Unit Tests of E-Commerce application should return 404 status code when query no records are found for the order id filter",
-      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
-      "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 200 to equal 404\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:109:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 200 to equal 404",
-        "actual": "200",
-        "expected": "404",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
-    },
-    {
-      "title": "should delete an order with correct order id and valid token and return status code 204",
-      "fullTitle": "Unit Tests of E-Commerce application should delete an order with correct order id and valid token and return status code 204",
-      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
-      "currentRetry": 0,
-      "err": {
-        "stack": "AssertionError: expected 404 to equal 204\n    at Context.<anonymous> (file:///Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js:323:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-        "message": "expected 404 to equal 204",
-        "actual": "404",
-        "expected": "204",
-        "showDiff": true,
-        "operator": "strictEqual"
-      }
-    }
-  ],
-  "passes": [
     {
       "title": "should return status code 400 for invalid order format",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 400 for invalid order format",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 7,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -460,7 +342,25 @@
       "title": "should return status code 400 with message for fields missing in order",
       "fullTitle": "Unit Tests of E-Commerce application should return status code 400 with message for fields missing in order",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
+      "duration": 2,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should create orders and return status code 201",
+      "fullTitle": "Unit Tests of E-Commerce application should create orders and return status code 201",
+      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
       "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should get all available orders successfully with status code 200",
+      "fullTitle": "Unit Tests of E-Commerce application should get all available orders successfully with status code 200",
+      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -478,7 +378,25 @@
       "title": "should filter and fetch order on product_id with status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on product_id with status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 2,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should filter and fetch order on user_id with status code 200",
+      "fullTitle": "Unit Tests of E-Commerce application should filter and fetch order on user_id with status code 200",
+      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should return 404 status code when query no records are found for the order id filter",
+      "fullTitle": "Unit Tests of E-Commerce application should return 404 status code when query no records are found for the order id filter",
+      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -523,7 +441,7 @@
       "title": "should generate the valid token with status code 201 ",
       "fullTitle": "Unit Tests of E-Commerce application should generate the valid token with status code 201 ",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -568,7 +486,7 @@
       "title": "should not generate the token and return status code 401 when password is blank",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when password is blank",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -577,7 +495,7 @@
       "title": "should not generate the token and return status code 401 when both username and password is blank",
       "fullTitle": "Unit Tests of E-Commerce application should not generate the token and return status code 401 when both username and password is blank",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -586,7 +504,7 @@
       "title": "should update the order successfully and return status code 200",
       "fullTitle": "Unit Tests of E-Commerce application should update the order successfully and return status code 200",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 2,
+      "duration": 3,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -595,7 +513,7 @@
       "title": "should return 404 when order with the given id is not found for update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -640,7 +558,7 @@
       "title": "should return 404 when order with the given id is not found for partial update",
       "fullTitle": "Unit Tests of E-Commerce application should return 404 when order with the given id is not found for partial update",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -658,7 +576,7 @@
       "title": "should not update the partial order when authorization token is invalid and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when authorization token is invalid and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -667,7 +585,16 @@
       "title": "should not update the partial order when no data is provided in the request body, and return status code 400",
       "fullTitle": "Unit Tests of E-Commerce application should not update the partial order when no data is provided in the request body, and return status code 400",
       "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
-      "duration": 1,
+      "duration": 2,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should delete an order with correct order id and valid token and return status code 204",
+      "fullTitle": "Unit Tests of E-Commerce application should delete an order with correct order id and valid token and return status code 204",
+      "file": "/Users/faisalkhatri/Github/restful-ecommerce/test/unit-tests.spec.js",
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
