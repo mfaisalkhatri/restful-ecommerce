@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha test/**/*.spec.js && mocha --reporter json > reports/test-results.json",
+    "test": "mocha test/**/*.spec.js",
+    "mocha-report": "mocha --reporter json > reports/test-results.json",
     "report": "mocha --reporter mochawesome"
   },
   "type": "module",

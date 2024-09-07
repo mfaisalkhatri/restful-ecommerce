@@ -31,4 +31,7 @@ jobs:
 
     - name: Run the tests
       run: node --trace-warnings & npm test
+
+    - name: Kill all instances of node
+      run: killall node
     
