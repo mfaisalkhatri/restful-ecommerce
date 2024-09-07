@@ -34,7 +34,7 @@ jobs:
 
     - name: Generate reporter
       run: npm run mocha-report
-
+      
     - name: Kill all instances of node
       run: killall node
 
@@ -43,6 +43,6 @@ jobs:
       if: success() || failure()
       with:
           name: Test Results        
-          path: ${{ github.workspace }}/reports/test-results.json
+          path: ${{ github.workspace }}/reports/mochawesome.json
           reporter: 'mocha-json'
     
