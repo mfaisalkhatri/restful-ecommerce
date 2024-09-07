@@ -37,8 +37,8 @@ jobs:
     - name: Build the App
       run: npm ci
     - run: |
-        npm start & 
-        npx wait-on http://localhost:3004 &&
+        npm start  
+        npx wait-on http://localhost:3004 
         npm test
     
     - name: Test Report
