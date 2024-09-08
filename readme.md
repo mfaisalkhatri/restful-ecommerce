@@ -25,7 +25,7 @@ Swagger is exposed on http://localhost:3004/api-docs
 # Running the Unit Tests
 
 After running all the steps mentioned in the `Installation steps` section
-1. Run `npm test`
+1. Run `npm run unit-test`
 
 
 ## Checkout the API Documentation on the [Wiki-Page](https://github.com/mfaisalkhatri/restful-ecommerce/wiki)
