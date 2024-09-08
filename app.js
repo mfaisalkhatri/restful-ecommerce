@@ -477,3 +477,41 @@ app.get("/swagger.json", (req, res) => {
       });
   });
 });
+
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Health check of the server
+ *     responses:
+ *       200:
+ *         description: Server is running
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: 'Up and Running'
+ *                 uptime:
+ *                   type: number
+ *                   example: 123456
+ *                 timestamp:
+ *                   type: string
+ *                   example: "2024-01-01T00:00:00.000Z"
+ *       500:
+ *         description: Server is down
+ */
+app.get('/health', (req, res) => {
+  try {
+      const healthCheck = {
+          status: 'UP and Running',
+          uptime: process.uptime() + " seconds",
+          timestamp: new Date().toISOString(),
+      };
+      res.status(200).json(healthCheck);
+  } catch (error) {
+      res.status(500).json({ status: 'DOWN and OUT!', error });
+  }
+});
