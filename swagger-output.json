@@ -1,0 +1,332 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Restful E-Commerce",
+    "version": "1.0.0",
+    "description": "A simple Node E-Commerce application for testing RESTful web services"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3004"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "product_id",
+          "product_name",
+          "product_amount",
+          "qty",
+          "tax_amt",
+          "total_amt"
+        ],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user"
+          },
+          "product_id": {
+            "type": "string",
+            "description": "The ID of the product"
+          },
+          "product_name": {
+            "type": "string",
+            "description": "The name of the product"
+          },
+          "product_amount": {
+            "type": "number",
+            "description": "The price of the product"
+          },
+          "qty": {
+            "type": "integer",
+            "description": "The quantity of the product"
+          },
+          "tax_amt": {
+            "type": "number",
+            "description": "The tax amount for the order"
+          },
+          "total_amt": {
+            "type": "number",
+            "description": "The total amount for the order"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/addOrder": {
+      "post": {
+        "summary": "Add a list of orders",
+        "tags": [
+          "Orders"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Orders added successfully, Added orders are returned in response."
+          },
+          "400": {
+            "description": "Request Payload must be an array of orders \n\n Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
+          }
+        }
+      }
+    },
+    "/getAllOrders": {
+      "get": {
+        "summary": "Get all orders",
+        "tags": [
+          "Orders"
+        ],
+        "responses": {
+          "200": {
+            "description": "Orders fetched successfully!"
+          },
+          "404": {
+            "description": "No order found!!"
+          }
+        }
+      }
+    },
+    "/getOrder": {
+      "get": {
+        "summary": "Get order by various parameters",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The order ID"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the user"
+          },
+          {
+            "in": "query",
+            "name": "product_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the product"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order found!! All available orders are returned in response."
+          },
+          "404": {
+            "description": "No order found with the given parameters!"
+          }
+        }
+      }
+    },
+    "/updateOrder/{id}": {
+      "put": {
+        "summary": "Update an order by ID",
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "The ID of the order"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order updated successfully"
+          },
+          "400": {
+            "description": "Failed to authenticate token! \n\n Invalid request, no data provided to update!"
+          },
+          "403": {
+            "description": "Forbidden! Token is missing!"
+          },
+          "404": {
+            "description": "No order found with the given ID"
+          }
+        }
+      }
+    },
+    "/partialUpdateOrder/{id}": {
+      "patch": {
+        "summary": "Partially update an order by ID",
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "The ID of the order"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "A partial object containing the fields to update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order updated successfully, updated order is returned in response."
+          },
+          "400": {
+            "description": "Failed to authenticate token! \n\n Invalid request, no data provided to update!"
+          },
+          "403": {
+            "description": "Forbidden! Token is missing!"
+          },
+          "404": {
+            "description": "No Order found with the given Order Id!"
+          }
+        }
+      }
+    },
+    "/deleteOrder/{id}": {
+      "delete": {
+        "summary": "Delete an order by ID",
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "The ID of the order"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Order deleted successfully, nothing is returned in response."
+          },
+          "400": {
+            "description": "Failed to authenticate token!"
+          },
+          "403": {
+            "description": "Forbidden! Token is missing!"
+          },
+          "404": {
+            "description": "No Order found with the given Order Id!!\""
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "summary": "Authenticate a user and return a JWT",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Authentication successful, token returned"
+          },
+          "400": {
+            "description": "Username and Password is required for authentication!"
+          },
+          "401": {
+            "description": "Authentication Failed! Invalid username or password!"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
