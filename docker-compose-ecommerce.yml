@@ -1,0 +1,9 @@
+# To execute this docker-compose yml file use `docker compose -f docker-compose-ecommerce.yml up -d`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker compose -f docker-compose-ecommerce.yml down`
+version: '3'
+services:
+  restful-ecommerce:
+    build: ./
+    ports:
+      - "3004:3004"
