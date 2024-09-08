@@ -5,6 +5,8 @@
 A simple Node E-Commerce application for testing RESTful web services. 
 This application is built for testers to practice API Testing Manually using tools like [Postman](https://www.postman.com/downloads/) or using API Test Automation tools like [SuperTest](https://www.npmjs.com/package/supertest), [Rest-Assured](https://rest-assured.io/), [Playwright](https://playwright.dev/java/docs/api-testing), [Cypress](https://learn.cypress.io/advanced-cypress-concepts/integration-and-api-tests), [Boyka-Framework](https://github.com/BoykaFramework/boyka-framework), etc.
 
+## Don't forget to give a :star: to make the project popular
+
 # Installation Steps
 1. Clone the repo
 1. Navigate into the restful-ecommerce root folder
