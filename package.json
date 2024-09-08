@@ -20,6 +20,7 @@
   "dependencies": {
     "chai": "^5.1.1",
     "express": "^4.19.2",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^10.7.3",
     "mochawesome": "^7.1.3",
