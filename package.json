@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha --reporter json --reporter-option output=reports/test-results.json",
+    "unit-test": "mocha **/*.spec.js",
     "mochawesome-report": "mocha --reporter mochawesome"
   },
   "type": "module",

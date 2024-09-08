@@ -11,6 +11,12 @@ import {expect} from 'chai';
 describe('Unit Tests of E-Commerce application', () => {
 	const baseurl = 'http://localhost:3004';
 
+	it('should perform health check of the server', async() => {
+		let response = await request(baseurl).get('/health');
+		expect(response.statusCode).to.be.equal(200);
+		expect(response.body.status).to.be.equal('UP and Running');
+	});	
+
 	it('should return status code 404 as no order exists', async() => {
 		let response = await request(baseurl).get('/getAllOrders');
 		expect(response.statusCode).to.be.equal(404)
