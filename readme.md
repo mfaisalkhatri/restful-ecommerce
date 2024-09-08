@@ -40,6 +40,16 @@ After running all the steps mentioned in the `Installation steps` section, the f
 
 ## Checkout the API Documentation on the [Wiki-Page](https://github.com/mfaisalkhatri/restful-ecommerce/wiki)
 
+## API Testing Tutorials
+
+- [Postman Learning Center](https://learning.postman.com/)
+- [Automating your API tests with REST Assured](https://testautomationu.applitools.com/automating-your-api-tests-with-rest-assured/)
+- [How to perform End to End API Testing using Playwright with Java and TestNG](https://medium.com/@iamfaisalkhatri/how-to-perform-end-to-end-api-testing-using-playwright-with-java-and-testng-26b318927115)
+- [End to End API Testing using rest-assured](https://medium.com/@iamfaisalkhatri/end-to-end-api-testing-using-rest-assured-a58c4ea80255)
+- [Learn API Testing using Rest-Assured | Tutorial | Part 1](https://www.youtube.com/live/xLKpdQE0oKY?si=VCija9_74KVhkdQK)
+- [Learn API Testing using Rest-Assured | Part 2 | Code Cleanup and Refactoring | Tutorial](https://www.youtube.com/live/AFQSolEeu74?si=QmRS9HTpjpHOcsq3)
+- [Curated lists of all Free learning recources for Software Test Automation Engineer ](https://github.com/mfaisalkhatri/awesome-learning)
+
 ## :question: Need Assistance?
 
 - Discuss your queries by writing to me @ `mohammadfaisalkhatri@gmail.com`
