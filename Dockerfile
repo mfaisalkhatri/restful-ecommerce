@@ -1,8 +1,8 @@
 FROM node:lts
 
-RUN mkdir /restful-ecommerce
+RUN mkdir /restful-ecommerce-app
 
-WORKDIR /restful-ecommerce
+WORKDIR /restful-ecommerce-app
 
 COPY ./ ./
 
