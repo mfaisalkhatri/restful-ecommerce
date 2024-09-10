@@ -44,6 +44,7 @@ jobs:
           reporter: 'mocha-json'
   
   Build_App_using_docker_and_Run_Tests:
+    needs: Build_App_using_node_and_Run_Tests
 
     runs-on: ubuntu-latest
     permissions:
