@@ -6,3 +6,5 @@ services:
     image: mfaisalkhatri/restful-ecommerce
     ports:
       - 3004:3004
+    volumes:
+      - ./:/restful-ecommerce-app
