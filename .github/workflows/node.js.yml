@@ -49,15 +49,15 @@ jobs:
     permissions:
       checks: write
 
+    services:
+      restful-ecommerce:
+        image: mfaisalkhatri/restful-ecommerce
+        ports:
+          - 3004:3004
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-
-    - name: Install the dependencies
-      run: npm ci
-
-    - name: Build the app using docker
-      run: docker compose -f docker-compose-ecommerce.yml up -d
 
     - name: Run Unit tests
       run: npm test
