@@ -33,7 +33,7 @@ jobs:
       run: npm test
   
     - name: Kill all instances of node
-      run: killall node
+      run: pkill -f node
 
     - name: Test Report
       uses: dorny/test-reporter@v1
