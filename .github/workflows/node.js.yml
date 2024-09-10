@@ -60,6 +60,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Install the dependencies
+      run: npm ci    
+
     - name: Run Unit tests
       run: npm test
 
