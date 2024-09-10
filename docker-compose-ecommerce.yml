@@ -6,3 +6,7 @@ services:
     image: mfaisalkhatri/restful-ecommerce
     ports:
       - 3004:3004
+    volumes:
+      - ./:/restful-ecommerce-app
+    extra_hosts:
+          - "host.docker.internal:host-gateway"

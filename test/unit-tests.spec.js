@@ -1,12 +1,14 @@
 import request from 'supertest';
-import orders from '../testdata/neworders.json' with { type: "json" };
-import orderObject from '../testdata/neworder_only_object.json' with { type: "json" }
-import missingFieldsOrder from '../testdata/neworder_field_missing.json' with { type: "json" }
+import orders from '../testdata/neworders.json' with {type: "json"};
+import orderObject from '../testdata/neworder_only_object.json' with {type: "json"}
+import missingFieldsOrder from '../testdata/neworder_field_missing.json' with {type: "json"}
 import authCredentials from '../testdata/auth_credentials.json' with {type: "json"}
 import updateOrder from '../testdata/update_order.json' with {type: "json"}
 import missingFieldInUpdateOrder from '../testdata/update_order_field_missing.json' with {type: "json"}
 import {expect} from 'chai';
-
+import Path from 'path';
+import fs from "fs";
+import { dirname } from 'path';
 
 describe('Unit Tests of E-Commerce application', () => {
 	const baseurl = 'http://localhost:3004';
@@ -357,5 +359,18 @@ describe('Unit Tests of E-Commerce application', () => {
 
 		expect(response.statusCode).to.be.equal(404);
 		expect(response.body.message).to.be.equal('No Order found with the given Order Id!');
+	});
+
+	it('should generate swagger.json in the local dir successfully when /swagger.json endpoint is called', async()=> {
+		let response = await request (baseurl).get('/swagger.json');
+
+		expect(response.statusCode).to.be.equal(200);
+		expect(response.body.message).to.be.equal('Swagger JSON file generated successfully');
+
+		const __dirname = process.cwd();
+		const path = Path.join(__dirname, "swagger-output.json")
+
+		expect(fs.existsSync(path)).to.be.true;
+
 	});
 });
