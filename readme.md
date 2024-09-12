@@ -42,6 +42,19 @@ After running all the steps mentioned in the `Installation steps` section, the f
 
 ## Checkout the API Documentation on the [Wiki-Page](https://github.com/mfaisalkhatri/restful-ecommerce/wiki)
 
+## Tutorials of this Project 
+
+### Blog
+
+- [RESTful E-Commerce API in Node.js: Demo APIs for API Testing](https://medium.com/@iamfaisalkhatri/restful-ecommerce-a-simple-demo-node-e-commerce-application-for-practising-api-testing-db867ed3be9f)
+
+### YouTube
+
+- RESTful E-Commerce API in Node.js: Demo APIs for API Testing | Open Source | Tutorial
+
+[![RESTful E-Commerce API in Node.js: Demo APIs for API Testing | Open Source | Tutorial](https://img.youtube.com/vi/9WDhjf-Qlo4/0.jpg)](https://www.youtube.com/watch?v=9WDhjf-Qlo4)
+
+
 ## API Testing Tutorials
 
 - [Postman Learning Center](https://learning.postman.com/)
