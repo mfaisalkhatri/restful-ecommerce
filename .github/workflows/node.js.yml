@@ -46,7 +46,6 @@ jobs:
 
   Build_App_using_docker_and_Run_Tests:
     name: Build Service using docker and run unit tests
-    needs: Build_App_using_node_and_Run_Tests
 
     runs-on: ubuntu-latest
     permissions:
@@ -63,7 +62,7 @@ jobs:
       run: docker compose -f docker-compose-ecommerce.yml up -d
 
     - name: Run the tests
-      run: npm test
+      run: npx wait-on http://localhost:3004 && npm test
   
     - name: Stop restful ecommerce service
       run: docker compose -f docker-compose-ecommerce.yml down --remove-orphans
