@@ -13,6 +13,37 @@ on:
       - main
       - issue-*
 jobs:
+  Build_App_using_node_and_Run_Tests:
+    name: Build Service using node and run unit tests
+
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install the dependencies
+      run: npm ci
+
+    - name: Build the app and run the tests
+      run: npm start && npx wait-on http://localhost:3004 & 
+
+    - name: Run the tests
+      run: npm test
+  
+    - name: Kill all instances of node
+      run: pkill -f node
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+          name: Test Report
+          path: ${{ github.workspace }}/reports/test-results.json
+          reporter: 'mocha-json'
+
   Build_App_using_docker_and_Run_Tests:
     name: Build Service using docker and run unit tests
 
@@ -35,11 +66,3 @@ jobs:
 
     - name: Stop restful ecommerce service
       run: docker compose -f docker-compose-ecommerce.yml down --remove-orphans
-
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
-      with:
-          name: Test Report
-          path: ${{ github.workspace }}/reports/test-results.json
-          reporter: 'mocha-json'
