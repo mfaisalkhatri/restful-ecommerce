@@ -25,13 +25,13 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Start restful ecommerce service using docker
-      run: docker compose -f docker-compose-ecommerce.yml up -d && npx wait-on http://localhost:3004 &
+      run: docker compose -f docker-compose-ecommerce.yml up -d
 
     - name: Install the dependencies
       run: npm ci
 
     - name: Run the tests
-      run:  npm test
+      run:  npm run unit-test
 
     - name: Stop restful ecommerce service
       run: docker compose -f docker-compose-ecommerce.yml down --remove-orphans
