@@ -43,26 +43,3 @@ jobs:
           name: Test Report
           path: ${{ github.workspace }}/reports/test-results.json
           reporter: 'mocha-json'
-
-  Build_App_using_docker_and_Run_Tests:
-    name: Build Service using docker and run unit tests
-
-    runs-on: ubuntu-latest
-    permissions:
-      checks: write
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Start restful ecommerce service using docker
-      run: docker compose -f docker-compose-ecommerce.yml up -d
-
-    - name: Install the dependencies
-      run: npm ci
-
-    - name: Run the tests
-      run:  npm run unit-test
-
-    - name: Stop restful ecommerce service
-      run: docker compose -f docker-compose-ecommerce.yml down --remove-orphans
