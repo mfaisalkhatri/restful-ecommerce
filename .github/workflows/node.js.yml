@@ -46,6 +46,7 @@ jobs:
 
   Build_App_using_docker_and_Run_Tests:
     name: Build Service using docker and run unit tests
+    needs: Build_App_using_node_and_Run_Tests
 
     runs-on: ubuntu-latest
     permissions:
