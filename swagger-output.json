@@ -85,10 +85,10 @@
         },
         "responses": {
           "201": {
-            "description": "Orders added successfully, Added orders are returned in response."
+            "description": "Orders added successfully!, Added orders are returned in response"
           },
           "400": {
-            "description": "Request Payload must be an array of orders \n\n Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
+            "description": "Request Payload must be an array of orders! \n\n Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
           }
         }
       }
@@ -185,16 +185,16 @@
         },
         "responses": {
           "200": {
-            "description": "Order updated successfully"
+            "description": "Order updated successfully!"
           },
           "400": {
-            "description": "Failed to authenticate token! \n\n Invalid request, no data provided to update!"
+            "description": "Failed to authenticate token! \n\n Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
           },
           "403": {
             "description": "Forbidden! Token is missing!"
           },
           "404": {
-            "description": "No order found with the given ID"
+            "description": "No order found with the given Id!"
           }
         }
       }
@@ -272,7 +272,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Order deleted successfully, nothing is returned in response."
+            "description": "Nothing is returned in response."
           },
           "400": {
             "description": "Failed to authenticate token!"
@@ -316,7 +316,7 @@
         },
         "responses": {
           "201": {
-            "description": "Authentication successful, token returned"
+            "description": "Authentication successful!, token returned"
           },
           "400": {
             "description": "Username and Password is required for authentication!"
