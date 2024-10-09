@@ -74,10 +74,10 @@ const SECRET_KEY = "Secret999#";
  *               $ref: '#/components/schemas/Order'
  *     responses:
  *       201:
- *         description: Orders added successfully, Added orders are returned in response.
+ *         description: Orders added successfully!, Added orders are returned in response
  *       400:
- *         description: "Request Payload must be an array of orders \n\n
- *                      Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
+ *         description: "Request Payload must be an array of orders! \n\n
+ *                       Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
  */
 app.post("/addOrder", (req, res) => {
   const orderArray = req.body;
@@ -223,14 +223,14 @@ app.get("/getOrder", (req, res) => {
  *             $ref: '#/components/schemas/Order'
  *     responses:
  *       200:
- *         description: Order updated successfully
+ *         description: Order updated successfully!
  *       400:
  *         description: "Failed to authenticate token! \n\n
- *                       Invalid request, no data provided to update!"
+ *                       Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
  *       403:
  *         description: Forbidden! Token is missing!
  *       404:
- *         description: No order found with the given ID
+ *         description: No order found with the given Id!
  */
 app.put("/updateOrder/:id", (req, res) => {
   const token = req.headers["authorization"];
@@ -373,7 +373,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
  *         description: The ID of the order
  *     responses:
  *       204:
- *         description: Order deleted successfully, nothing is returned in response.
+ *         description: Nothing is returned in response.
  *       400:
  *         description: Failed to authenticate token!
  *       403:
@@ -381,7 +381,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
  *       404:
  *         description: No Order found with the given Order Id!!"
  */
-app.delete("/deleteOrder/:id", (req, res) => {
+app.delete("/deleteOrder/:id", (req, res, done) => {
   const token = req.headers["authorization"];
 
   if (!token) {
@@ -405,7 +405,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
     }
 
     orders.splice(orderIndex, 1);
-    res.status(204).send("Order deleted successfully");
+    res.status(204).send('Order deleted successfully!');
   });
 });
 
@@ -431,7 +431,7 @@ app.delete("/deleteOrder/:id", (req, res) => {
  *               - password
  *     responses:
  *       201:
- *         description: Authentication successful, token returned
+ *         description: Authentication successful!, token returned
  *       400:
  *         description: Username and Password is required for authentication!
  *       401:
