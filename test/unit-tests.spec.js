@@ -12,6 +12,7 @@ import { dirname } from 'path';
 
 describe('Unit Tests of E-Commerce application', () => {
 	const baseurl = 'http://localhost:3004';
+	const __dirname = process.cwd();
 
 	it('should perform health check of the server', async() => {
 		let response = await request(baseurl).get('/health');
@@ -367,10 +368,49 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.statusCode).to.be.equal(200);
 		expect(response.body.message).to.be.equal('Swagger JSON file generated successfully');
 
-		const __dirname = process.cwd();
 		const path = Path.join(__dirname, "swagger-output.json")
 
 		expect(fs.existsSync(path)).to.be.true;
 
 	});
-});
+
+	it('should upload an image and return status code 200', async() => {
+		
+		const filePath = Path.join(__dirname, "/testdata/sample_image.png");
+
+		if(fs.exists){
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath);
+		expect(response.statusCode).to.be.equal(200);
+		expect(response.body.message).to.be.equal('File uploaded successfully!');
+		} else {
+			throw new Error ("File does not exists");
+		}
+	});
+	it('should return status code 404 as file is not attached for upload', async() => {
+	
+		let response = await request(baseurl).post('/imageUpload').attach('file','');
+		expect(response.statusCode).to.be.equal(404);
+		expect(response.body.message).to.be.equal('No file for for upload!');
+
+	});
+	
+	it('should return status code 404 when pdf is attached for upload', async() => {
+	
+		const filePath = Path.join(__dirname, "/testdata/sample_pdf.pdf");
+
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath);
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Only images (jpeg, jpg, png) are allowed!');
+
+	});
+	it('should return status code 404 and display message file size exceeds 5 MB', async() => {
+	
+		const filePath = Path.join(__dirname, "/testdata/over_5_mb.jpg");
+
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath);
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('File size exceeds 5 MB!');
+
+	});
+
+ });

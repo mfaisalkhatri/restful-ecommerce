@@ -553,7 +553,7 @@ const upload = multer({
 });
 
 app.post('/imageUpload', (req, res) => {
-  upload.single('image')(req, res, (err) => {
+  upload.single('file')(req, res, (err) => {
       if (err instanceof multer.MulterError) {
           if (err.code === 'LIMIT_FILE_SIZE') {
               return res.status(400).json({ message: 'File size exceeds 5 MB!' });
@@ -563,7 +563,7 @@ app.post('/imageUpload', (req, res) => {
       }
 
       if (!req.file) {
-          return res.status(404).json({ message: 'No file uploaded!' });
+          return res.status(404).json({ message: 'No file for for upload!' });
       }
 
       res.status(200).json({
