@@ -525,6 +525,22 @@ app.get('/health', (req, res) => {
   }
 });
 
+const authenticateToken = (req, res, next) => {
+const token = req.headers["authorization"];
+
+if (!token) {
+  return res.status(403).json({
+    message: "Forbidden! Token is missing!",
+  });
+}
+
+jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
+  if (err) {
+    return res.status(400).json({ message: "Failed to authenticate token!" });
+  }
+  next();
+});
+};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -552,7 +568,7 @@ const upload = multer({
   }
 });
 
-app.post('/imageUpload', (req, res) => {
+app.post('/imageUpload',authenticateToken, (req, res) => {
   upload.single('file')(req, res, (err) => {
       if (err instanceof multer.MulterError) {
           if (err.code === 'LIMIT_FILE_SIZE') {
@@ -563,7 +579,7 @@ app.post('/imageUpload', (req, res) => {
       }
 
       if (!req.file) {
-          return res.status(404).json({ message: 'No file for for upload!' });
+          return res.status(404).json({ message: 'No file for upload!' });
       }
 
       res.status(200).json({

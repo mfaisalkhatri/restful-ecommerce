@@ -379,18 +379,27 @@ describe('Unit Tests of E-Commerce application', () => {
 		const filePath = Path.join(__dirname, "/testdata/sample_image.png");
 
 		if(fs.exists){
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath);
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		.set('Authorization', authResponse.body.token);
+
 		expect(response.statusCode).to.be.equal(200);
 		expect(response.body.message).to.be.equal('File uploaded successfully!');
+		expect(response.body.file.originalName).to.be.equal("sample_image.png");
+		expect(response.body.file.path).to.include("uploads/");
+		expect(response.body.file.size).to.not.be.null;
 		} else {
 			throw new Error ("File does not exists");
 		}
 	});
 	it('should return status code 404 as file is not attached for upload', async() => {
 	
-		let response = await request(baseurl).post('/imageUpload').attach('file','');
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request(baseurl).post('/imageUpload').attach('file','')
+		.set('Authorization', authResponse.body.token);
 		expect(response.statusCode).to.be.equal(404);
-		expect(response.body.message).to.be.equal('No file for for upload!');
+		expect(response.body.message).to.be.equal('No file for upload!');
 
 	});
 	
@@ -398,7 +407,10 @@ describe('Unit Tests of E-Commerce application', () => {
 	
 		const filePath = Path.join(__dirname, "/testdata/sample_pdf.pdf");
 
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath);
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		.set('Authorization', authResponse.body.token);
 		expect(response.statusCode).to.be.equal(400);
 		expect(response.body.message).to.be.equal('Only images (jpeg, jpg, png) are allowed!');
 
@@ -407,9 +419,22 @@ describe('Unit Tests of E-Commerce application', () => {
 	
 		const filePath = Path.join(__dirname, "/testdata/over_5_mb.jpg");
 
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath);
+		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		.set('Authorization', authResponse.body.token);
 		expect(response.statusCode).to.be.equal(400);
 		expect(response.body.message).to.be.equal('File size exceeds 5 MB!');
+
+	});
+
+	it('should not upload an image and return status code 400 when authorization token is in invalid format', async() => {
+
+		const filePath = Path.join(__dirname, "/testdata/sample_image.png");
+		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		.set('Authorization', 'invalidtokenuyiy234sdf')
+
+		expect(response.statusCode).to.be.equal(400);
+		expect(response.body.message).to.be.equal('Failed to authenticate token!');
 
 	});
 
