@@ -1,7 +1,16 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import fs from "fs";
+import multer  from "multer"
+import path from "path"
 import { swaggerUi, swaggerSpec } from "./swagger.js";
+
+
+const uploadsDir = 'uploads';
+
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+}
 
 const app = express();
 const port = 3004;
@@ -514,4 +523,72 @@ app.get('/health', (req, res) => {
   } catch (error) {
       res.status(500).json({ status: 'DOWN and OUT!', error });
   }
+});
+
+const authenticateToken = (req, res, next) => {
+const token = req.headers["authorization"];
+
+if (!token) {
+  return res.status(403).json({
+    message: "Forbidden! Token is missing!",
+  });
+}
+
+jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
+  if (err) {
+    return res.status(400).json({ message: "Failed to authenticate token!" });
+  }
+  next();
+});
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+      const fileTypes = /jpeg|jpg|png/; // Allowed file types
+      const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+      const mimeType = fileTypes.test(file.mimetype);
+
+      if (extname && mimeType) {
+          cb(null, true);
+      } else {
+          cb(new Error('Only images (jpeg, jpg, png) are allowed!'));
+      }
+  }
+});
+
+app.post('/imageUpload',authenticateToken, (req, res) => {
+  upload.single('file')(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+          if (err.code === 'LIMIT_FILE_SIZE') {
+              return res.status(400).json({ message: 'File size exceeds 5 MB!' });
+          }
+      } else if (err) {
+          return res.status(400).json({ message: err.message });
+      }
+
+      if (!req.file) {
+          return res.status(404).json({ message: 'No file for upload!' });
+      }
+
+      res.status(200).json({
+          message: 'File uploaded successfully!',
+          file: {
+              originalName: req.file.originalname,
+              path: req.file.path,
+              size: req.file.size,
+          }
+      });
+  });
 });
