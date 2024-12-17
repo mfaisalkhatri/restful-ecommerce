@@ -568,8 +568,54 @@ const upload = multer({
   }
 });
 
+/**
+ * @swagger
+ * /imageUpload:
+ *   post:
+ *     summary: Upload an image file
+ *     description: Upload a JPEG, JPG, or PNG file (up to 5MB) with Bearer token authentication.
+ *     tags: [Image Upload]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: Image file to upload (jpg, jpeg, png)
+ *     responses:
+ *       200:
+ *         description: File uploaded successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 file:
+ *                   type: object
+ *                   properties:
+ *                     originalName:
+ *                       type: string
+ *                     path:
+ *                       type: string
+ *                     size:
+ *                       type: number
+ *       400:
+ *         description: Bad Request (Invalid file or file size exceeds 5MB)
+ *       401:
+ *         description: Unauthorized (Missing or invalid Bearer token)
+ *       403:
+ *         description: Forbidden (Invalid or expired token)
+ */
 app.post('/imageUpload',authenticateToken, (req, res) => {
-  upload.single('file')(req, res, (err) => {
+  upload.single('image')(req, res, (err) => {
       if (err instanceof multer.MulterError) {
           if (err.code === 'LIMIT_FILE_SIZE') {
               return res.status(400).json({ message: 'File size exceeds 5 MB!' });
