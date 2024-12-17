@@ -380,7 +380,7 @@ describe('Unit Tests of E-Commerce application', () => {
 
 		if(fs.exists){
 		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		let response = await request(baseurl).post('/imageUpload').attach('image',filePath)
 		.set('Authorization', authResponse.body.token);
 
 		expect(response.statusCode).to.be.equal(200);
@@ -396,7 +396,7 @@ describe('Unit Tests of E-Commerce application', () => {
 	
 		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
 
-		let response = await request(baseurl).post('/imageUpload').attach('file','')
+		let response = await request(baseurl).post('/imageUpload').attach('image','')
 		.set('Authorization', authResponse.body.token);
 		expect(response.statusCode).to.be.equal(404);
 		expect(response.body.message).to.be.equal('No file for upload!');
@@ -409,7 +409,7 @@ describe('Unit Tests of E-Commerce application', () => {
 
 		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
 
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		let response = await request(baseurl).post('/imageUpload').attach('image',filePath)
 		.set('Authorization', authResponse.body.token);
 		expect(response.statusCode).to.be.equal(400);
 		expect(response.body.message).to.be.equal('Only images (jpeg, jpg, png) are allowed!');
@@ -420,7 +420,7 @@ describe('Unit Tests of E-Commerce application', () => {
 		const filePath = Path.join(__dirname, "/testdata/over_5_mb.jpg");
 
 		let authResponse = await request (baseurl).post('/auth').send(authCredentials);
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		let response = await request(baseurl).post('/imageUpload').attach('image',filePath)
 		.set('Authorization', authResponse.body.token);
 		expect(response.statusCode).to.be.equal(400);
 		expect(response.body.message).to.be.equal('File size exceeds 5 MB!');
@@ -430,7 +430,7 @@ describe('Unit Tests of E-Commerce application', () => {
 	it('should not upload an image and return status code 400 when authorization token is in invalid format', async() => {
 
 		const filePath = Path.join(__dirname, "/testdata/sample_image.png");
-		let response = await request(baseurl).post('/imageUpload').attach('file',filePath)
+		let response = await request(baseurl).post('/imageUpload').attach('image',filePath)
 		.set('Authorization', 'invalidtokenuyiy234sdf')
 
 		expect(response.statusCode).to.be.equal(400);
