@@ -10,6 +10,7 @@ node_modules
 *.ipr
 /.idea/
 /mochawesome-report/
+uploads/*.png
 
 ### VS Code ###
 .vscode/
