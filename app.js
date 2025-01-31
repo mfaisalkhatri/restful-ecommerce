@@ -1,15 +1,14 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import fs from "fs";
-import multer  from "multer"
-import path from "path"
+import multer from "multer";
+import path from "path";
 import { swaggerUi, swaggerSpec } from "./swagger.js";
 
-
-const uploadsDir = 'uploads';
+const uploadsDir = "uploads";
 
 if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir);
+  fs.mkdirSync(uploadsDir);
 }
 
 const app = express();
@@ -31,22 +30,21 @@ const SECRET_KEY = "Secret999#";
 
 const authenticateToken = (req, res, next) => {
   const token = req.headers["authorization"];
-  
+
   if (!token) {
     return res.status(403).json({
       message: "Forbidden! Token is missing!",
     });
   }
-  
+
   jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(400).json({ message: "Failed to authenticate token!" });
     }
-    req.user=decoded;
+    req.user = decoded;
     next();
   });
-  };
-  
+};
 
 /**
  * @swagger
@@ -261,39 +259,38 @@ app.get("/getOrder", (req, res) => {
  *         description: No order found with the given Id!
  */
 app.put("/updateOrder/:id", authenticateToken, (req, res) => {
- 
-    const id = parseInt(req.params.id);
-    const updatedDetails = req.body;
+  const id = parseInt(req.params.id);
+  const updatedDetails = req.body;
 
-    const orderIndex = orders.findIndex((order) => order.id === id);
-    if (orderIndex === -1) {
-      return res.status(404).json({
-        message: "No Order found with the given Order Id!",
-      });
-    }
-
-    if (
-      !updatedDetails.user_id ||
-      !updatedDetails.product_id ||
-      !updatedDetails.product_name ||
-      !updatedDetails.product_amount ||
-      !updatedDetails.qty ||
-      !updatedDetails.tax_amt ||
-      !updatedDetails.total_amt
-    ) {
-      return res.status(400).json({
-        message:
-          "Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!",
-      });
-    }
-
-    orders[orderIndex] = { id: id, ...updatedDetails };
-
-    res.status(200).json({
-      message: "Order updated successfully!",
-      order: orders[orderIndex],
+  const orderIndex = orders.findIndex((order) => order.id === id);
+  if (orderIndex === -1) {
+    return res.status(404).json({
+      message: "No Order found with the given Order Id!",
     });
+  }
+
+  if (
+    !updatedDetails.user_id ||
+    !updatedDetails.product_id ||
+    !updatedDetails.product_name ||
+    !updatedDetails.product_amount ||
+    !updatedDetails.qty ||
+    !updatedDetails.tax_amt ||
+    !updatedDetails.total_amt
+  ) {
+    return res.status(400).json({
+      message:
+        "Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!",
+    });
+  }
+
+  orders[orderIndex] = { id: id, ...updatedDetails };
+
+  res.status(200).json({
+    message: "Order updated successfully!",
+    order: orders[orderIndex],
   });
+});
 
 /**
  * @swagger
@@ -328,35 +325,35 @@ app.put("/updateOrder/:id", authenticateToken, (req, res) => {
  *       404:
  *         description: No Order found with the given Order Id!
  */
-app.patch("/partialUpdateOrder/:id", authenticateToken,(req, res) => {
-    const id = parseInt(req.params.id);
-    const updatedField = req.body;
+app.patch("/partialUpdateOrder/:id", authenticateToken, (req, res) => {
+  const id = parseInt(req.params.id);
+  const updatedField = req.body;
 
-    if (!updatedField || Object.keys(updatedField).length === 0) {
-      return res.status(400).json({
-        message: "Invalid request, no data provided to update!",
-      });
-    }
-
-    const order = orders.find((order) => order.id === id);
-
-    if (!order) {
-      return res.status(404).json({
-        message: "No Order found with the given Order Id!",
-      });
-    }
-
-    Object.keys(updatedField).forEach((key) => {
-      if (order.hasOwnProperty(key)) {
-        order[key] = updatedField[key];
-      }
+  if (!updatedField || Object.keys(updatedField).length === 0) {
+    return res.status(400).json({
+      message: "Invalid request, no data provided to update!",
     });
+  }
 
-    res.status(200).json({
-      message: "Order updated successfully!",
-      order,
+  const order = orders.find((order) => order.id === id);
+
+  if (!order) {
+    return res.status(404).json({
+      message: "No Order found with the given Order Id!",
     });
+  }
+
+  Object.keys(updatedField).forEach((key) => {
+    if (order.hasOwnProperty(key)) {
+      order[key] = updatedField[key];
+    }
   });
+
+  res.status(200).json({
+    message: "Order updated successfully!",
+    order,
+  });
+});
 
 /**
  * @swagger
@@ -383,19 +380,48 @@ app.patch("/partialUpdateOrder/:id", authenticateToken,(req, res) => {
  *       404:
  *         description: No Order found with the given Order Id!!"
  */
-app.delete("/deleteOrder/:id", authenticateToken,(req, res, done) => {
-    const id = parseInt(req.params.id);
-    const orderIndex = orders.findIndex((order) => order.id === id);
+app.delete("/deleteOrder/:id", authenticateToken, (req, res, done) => {
+  const id = parseInt(req.params.id);
+  const orderIndex = orders.findIndex((order) => order.id === id);
 
-    if (orderIndex === -1) {
-      return res.status(404).json({
-        message: "No Order found with the given Order Id!",
-      });
-    }
+  if (orderIndex === -1) {
+    return res.status(404).json({
+      message: "No Order found with the given Order Id!",
+    });
+  }
 
-    orders.splice(orderIndex, 1);
-    res.status(204).send('Order deleted successfully!');
-  });
+  orders.splice(orderIndex, 1);
+  res.status(204).send("Order deleted successfully!");
+});
+
+/**
+ * @swagger
+ * /deleteAllOrders:
+ *   delete:
+ *     summary: Deletes all the orders in the system
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       204:
+ *         description: Nothing is returned in response.
+ *       400:
+ *         description: Failed to authenticate token! Or No orders available to delete!
+ *       403:
+ *         description: Forbidden! Token is missing!
+ */
+
+app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
+  if (orders.length === 0) {
+    return res.status(400).json({ message: "No orders available to delete!" });
+  }
+
+  orders = [];
+
+  res
+    .status(204)
+    .send("All orders have been deleted successfully!");
+});
 
 /**
  * @swagger
@@ -457,12 +483,10 @@ app.get("/swagger.json", (req, res) => {
         .status(400)
         .json({ message: "Error writing Swagger JSON file", error: err });
     }
-    res
-      .status(200)
-      .json({
-        message: "Swagger JSON file generated successfully",
-        swaggerSpec,
-      });
+    res.status(200).json({
+      message: "Swagger JSON file generated successfully",
+      swaggerSpec,
+    });
   });
 });
 
@@ -491,43 +515,45 @@ app.get("/swagger.json", (req, res) => {
  *       500:
  *         description: Server is down
  */
-app.get('/health', (req, res) => {
+app.get("/health", (req, res) => {
   try {
-      const healthCheck = {
-          status: 'UP and Running',
-          uptime: process.uptime() + " seconds",
-          timestamp: new Date().toISOString(),
-      };
-      res.status(200).json(healthCheck);
+    const healthCheck = {
+      status: "UP and Running",
+      uptime: process.uptime() + " seconds",
+      timestamp: new Date().toISOString(),
+    };
+    res.status(200).json(healthCheck);
   } catch (error) {
-      res.status(500).json({ status: 'DOWN and OUT!', error });
+    res.status(500).json({ status: "DOWN and OUT!", error });
   }
 });
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, 'uploads/');
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
 });
 
 const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-      const fileTypes = /jpeg|jpg|png/; // Allowed file types
-      const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-      const mimeType = fileTypes.test(file.mimetype);
+    const fileTypes = /jpeg|jpg|png/; // Allowed file types
+    const extname = fileTypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimeType = fileTypes.test(file.mimetype);
 
-      if (extname && mimeType) {
-          cb(null, true);
-      } else {
-          cb(new Error('Only images (jpeg, jpg, png) are allowed!'));
-      }
-  }
+    if (extname && mimeType) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only images (jpeg, jpg, png) are allowed!"));
+    }
+  },
 });
 
 /**
@@ -576,27 +602,27 @@ const upload = multer({
  *       403:
  *         description: Forbidden (Invalid or expired token)
  */
-app.post('/imageUpload',authenticateToken, (req, res) => {
-  upload.single('image')(req, res, (err) => {
-      if (err instanceof multer.MulterError) {
-          if (err.code === 'LIMIT_FILE_SIZE') {
-              return res.status(400).json({ message: 'File size exceeds 5 MB!' });
-          }
-      } else if (err) {
-          return res.status(400).json({ message: err.message });
+app.post("/imageUpload", authenticateToken, (req, res) => {
+  upload.single("image")(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      if (err.code === "LIMIT_FILE_SIZE") {
+        return res.status(400).json({ message: "File size exceeds 5 MB!" });
       }
+    } else if (err) {
+      return res.status(400).json({ message: err.message });
+    }
 
-      if (!req.file) {
-          return res.status(404).json({ message: 'No file for upload!' });
-      }
+    if (!req.file) {
+      return res.status(404).json({ message: "No file for upload!" });
+    }
 
-      res.status(200).json({
-          message: 'File uploaded successfully!',
-          file: {
-              originalName: req.file.originalname,
-              path: req.file.path,
-              size: req.file.size,
-          }
-      });
+    res.status(200).json({
+      message: "File uploaded successfully!",
+      file: {
+        originalName: req.file.originalname,
+        path: req.file.path,
+        size: req.file.size,
+      },
+    });
   });
 });
