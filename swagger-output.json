@@ -286,6 +286,33 @@
         }
       }
     },
+    "/deleteAllOrders": {
+      "delete": {
+        "summary": "Deletes all the orders in the system",
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Nothing is returned in response."
+          },
+          "400": {
+            "description": "Failed to authenticate token!"
+          },
+          "403": {
+            "description": "Forbidden! Token is missing!"
+          },
+          "404": {
+            "description": "No orders available to delete!"
+          }
+        }
+      }
+    },
     "/auth": {
       "post": {
         "summary": "Authenticate a user and return a JWT",

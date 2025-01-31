@@ -406,17 +406,21 @@ app.delete("/deleteOrder/:id", authenticateToken, (req, res, done) => {
  *       204:
  *         description: Nothing is returned in response.
  *       400:
- *         description: Failed to authenticate token! Or No orders available to delete!
+ *         description: Failed to authenticate token!
  *       403:
  *         description: Forbidden! Token is missing!
+ *       404:
+ *         description: No orders available to delete!
+
  */
 
 app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
   if (orders.length === 0) {
-    return res.status(400).json({ message: "No orders available to delete!" });
+    return res.status(404).json({ message: "No orders available to delete!" });
   }
 
   orders = [];
+  nextOrderId = 1;
 
   res
     .status(204)
