@@ -29,6 +29,25 @@ let orders = [];
 let nextOrderId = 1;
 const SECRET_KEY = "Secret999#";
 
+const authenticateToken = (req, res, next) => {
+  const token = req.headers["authorization"];
+  
+  if (!token) {
+    return res.status(403).json({
+      message: "Forbidden! Token is missing!",
+    });
+  }
+  
+  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(400).json({ message: "Failed to authenticate token!" });
+    }
+    req.user=decoded;
+    next();
+  });
+  };
+  
+
 /**
  * @swagger
  * components:
@@ -241,19 +260,8 @@ app.get("/getOrder", (req, res) => {
  *       404:
  *         description: No order found with the given Id!
  */
-app.put("/updateOrder/:id", (req, res) => {
-  const token = req.headers["authorization"];
-
-  if (!token) {
-    return res.status(403).json({
-      message: "Forbidden! Token is missing!",
-    });
-  }
-
-  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(400).json({ message: "Failed to authenticate token!" });
-    }
+app.put("/updateOrder/:id", authenticateToken, (req, res) => {
+ 
     const id = parseInt(req.params.id);
     const updatedDetails = req.body;
 
@@ -286,7 +294,6 @@ app.put("/updateOrder/:id", (req, res) => {
       order: orders[orderIndex],
     });
   });
-});
 
 /**
  * @swagger
@@ -321,20 +328,7 @@ app.put("/updateOrder/:id", (req, res) => {
  *       404:
  *         description: No Order found with the given Order Id!
  */
-app.patch("/partialUpdateOrder/:id", (req, res) => {
-  const token = req.headers["authorization"];
-
-  if (!token) {
-    return res.status(403).json({
-      message: "Forbidden! Token is missing!",
-    });
-  }
-
-  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(400).json({ message: "Failed to authenticate token!" });
-    }
-
+app.patch("/partialUpdateOrder/:id", authenticateToken,(req, res) => {
     const id = parseInt(req.params.id);
     const updatedField = req.body;
 
@@ -363,7 +357,6 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
       order,
     });
   });
-});
 
 /**
  * @swagger
@@ -390,20 +383,7 @@ app.patch("/partialUpdateOrder/:id", (req, res) => {
  *       404:
  *         description: No Order found with the given Order Id!!"
  */
-app.delete("/deleteOrder/:id", (req, res, done) => {
-  const token = req.headers["authorization"];
-
-  if (!token) {
-    return res.status(403).json({
-      message: "Forbidden! Token is missing!",
-    });
-  }
-
-  jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(400).json({ message: "Failed to authenticate token!" });
-    }
-
+app.delete("/deleteOrder/:id", authenticateToken,(req, res, done) => {
     const id = parseInt(req.params.id);
     const orderIndex = orders.findIndex((order) => order.id === id);
 
@@ -416,7 +396,6 @@ app.delete("/deleteOrder/:id", (req, res, done) => {
     orders.splice(orderIndex, 1);
     res.status(204).send('Order deleted successfully!');
   });
-});
 
 /**
  * @swagger
@@ -524,23 +503,6 @@ app.get('/health', (req, res) => {
       res.status(500).json({ status: 'DOWN and OUT!', error });
   }
 });
-
-const authenticateToken = (req, res, next) => {
-const token = req.headers["authorization"];
-
-if (!token) {
-  return res.status(403).json({
-    message: "Forbidden! Token is missing!",
-  });
-}
-
-jwt.verify(token.replace("Bearer ", ""), SECRET_KEY, (err, decoded) => {
-  if (err) {
-    return res.status(400).json({ message: "Failed to authenticate token!" });
-  }
-  next();
-});
-};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
