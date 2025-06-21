@@ -19,7 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       checks: write
-
+    
+    env:
+      AUTH_USERNAME: ${{secrets.AUTH_USERNAME}}
+      AUTH_PASSWORD: ${{secrets.AUTH_PASSWORD}}
+  
     steps:
     - name: Checkout
       uses: actions/checkout@v4

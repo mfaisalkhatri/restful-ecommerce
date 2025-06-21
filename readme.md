@@ -10,6 +10,11 @@ This application is built for testers to practice API Testing Manually using too
 # Installation Steps
 1. Clone the repo
 1. Navigate into the restful-ecommerce root folder
+1. Create a `.env` file and copy the following contents in it:
+  ```
+  AUTH_USERNAME=admin
+  AUTH_PASSWORD=secretPass123
+  ```
 1. Run `npm install`
 1. Run `npm start`
 
@@ -57,11 +62,12 @@ After running all the steps mentioned in the `Installation steps` section, the f
 
 ## API Testing Tutorials
 
-- [Playwright Java API Testing | How to test POST requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-post-requests-4c9102d3ab03)
-- [Playwright Java API Testing | How to test GET requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-get-requests-c036b984cc6d)
-- [Playwright Java API Testing | How to test PUT requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-put-requests-d6b1d054d64b)
-- [Playwright Java API Testing | How to test PATCH requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-patch-requests-f6b0867d91e7)
-- [Playwright Java API Testing | How to test DELETE requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-delete-requests-2ff77feb0383)
+- [How to test POST requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-post-requests-4c9102d3ab03)
+- [How to test GET requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-get-requests-c036b984cc6d)
+- [How to test PUT requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-put-requests-d6b1d054d64b)
+- [How to test PATCH requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-patch-requests-f6b0867d91e7)
+- [How to test DELETE requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-delete-requests-2ff77feb0383)
+- [How to Create a Custom Logger for Logging Response Details with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-creating-custom-logger-for-logging-response-details-771e961d9faa)
 - [Postman Learning Center](https://learning.postman.com/)
 - [Automating your API tests with REST Assured](https://testautomationu.applitools.com/automating-your-api-tests-with-rest-assured/)
 - [How to perform End to End API Testing using Playwright with Java and TestNG](https://medium.com/@iamfaisalkhatri/how-to-perform-end-to-end-api-testing-using-playwright-with-java-and-testng-26b318927115)
