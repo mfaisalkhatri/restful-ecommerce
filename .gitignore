@@ -11,6 +11,7 @@ node_modules
 /.idea/
 /mochawesome-report/
 uploads/*.png
+.env
 
 ### VS Code ###
 .vscode/

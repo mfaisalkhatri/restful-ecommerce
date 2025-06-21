@@ -4,7 +4,9 @@ import fs from "fs";
 import multer from "multer";
 import path from "path";
 import { swaggerUi, swaggerSpec } from "./swagger.js";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const uploadsDir = "uploads";
 
 if (!fs.existsSync(uploadsDir)) {
@@ -458,13 +460,16 @@ app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
 app.post("/auth", (req, res) => {
   const { username, password } = req.body;
 
+  const envUsername = process.env.AUTH_USERNAME;
+  const envPassword = process.env.AUTH_PASSWORD;
+
   if (!username || !password) {
     return res.status(400).json({
       message: "Username and Password is required for authentication!",
     });
   }
 
-  if (username === "admin" && password === "secretPass123") {
+  if (username === envUsername && password === envPassword) {
     const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1h" });
 
     res.status(201).json({
