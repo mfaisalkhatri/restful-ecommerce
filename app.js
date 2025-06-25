@@ -84,6 +84,17 @@ const authenticateToken = (req, res, next) => {
  *         total_amt:
  *           type: number
  *           description: The total amount for the order
+ *    
+ *     AddOrderResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Orders added successfully!
+ *         orders:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Order'
  */
 
 /**
@@ -100,9 +111,14 @@ const authenticateToken = (req, res, next) => {
  *             type: array
  *             items:
  *               $ref: '#/components/schemas/Order'
+ * 
  *     responses:
  *       201:
  *         description: Orders added successfully!, Added orders are returned in response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AddOrderResponse'
  *       400:
  *         description: "Request Payload must be an array of orders! \n\n
  *                       Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
