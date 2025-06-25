@@ -157,6 +157,21 @@ app.post("/addOrder", (req, res) => {
     orders,
   });
 });
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     GetAllOrdersResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Orders fetched successfully!
+ *         orders:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Order'
+ */
 
 /**
  * @swagger
@@ -167,6 +182,10 @@ app.post("/addOrder", (req, res) => {
  *     responses:
  *       200:
  *         description: Orders fetched successfully!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GetAllOrdersResponse'
  *       404:
  *         description: No order found!!
  */
