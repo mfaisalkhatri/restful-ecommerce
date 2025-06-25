@@ -28,7 +28,7 @@ app.use(express.json());
 
 let orders = [];
 let nextOrderId = 1;
-const SECRET_KEY = "Secret999#";
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const authenticateToken = (req, res, next) => {
   const token = req.headers["authorization"];

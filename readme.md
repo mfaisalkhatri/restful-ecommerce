@@ -14,6 +14,7 @@ This application is built for testers to practice API Testing Manually using too
   ```
   AUTH_USERNAME=admin
   AUTH_PASSWORD=secretPass123
+  SECRET_KEY=Secret999$
   ```
 1. Run `npm install`
 1. Run `npm start`
