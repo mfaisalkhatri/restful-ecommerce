@@ -199,6 +199,21 @@ app.get("/getAllOrders", (req, res) => {
     res.status(404).json({ message: "No Order found!!" });
   }
 });
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     GetOrderResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Order found!!
+ *         orders:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Order'
+ */
 
 /**
  * @swagger
@@ -224,7 +239,11 @@ app.get("/getAllOrders", (req, res) => {
  *         description: The ID of the product
  *     responses:
  *       200:
- *         description: Order found!! All available orders are returned in response.
+ *         description: Order found!!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GetOrderResponse'
  *       404:
  *         description: No order found with the given parameters!
  */
