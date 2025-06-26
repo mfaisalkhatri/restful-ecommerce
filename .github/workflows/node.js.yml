@@ -69,7 +69,7 @@ jobs:
       run: docker compose -f docker-compose-ecommerce.yml up -d
 
     - name: Run the unit tests
-      run: npm run unit-tests
+      run: npm run unit-test
 
     - name: Stop the service
       run: docker compose -f docker-compose-ecommerce.yml down --remove-orphans
