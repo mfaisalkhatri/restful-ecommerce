@@ -23,6 +23,7 @@ jobs:
     env:
       AUTH_USERNAME: ${{secrets.AUTH_USERNAME}}
       AUTH_PASSWORD: ${{secrets.AUTH_PASSWORD}}
+      SECRET_KEY: ${{secrets.SECRET_KEY}}
   
     steps:
     - name: Checkout

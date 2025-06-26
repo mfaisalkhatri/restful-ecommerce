@@ -14,6 +14,7 @@ This application is built for testers to practice API Testing Manually using too
   ```
   AUTH_USERNAME=admin
   AUTH_PASSWORD=secretPass123
+  SECRET_KEY=Secret999$
   ```
 1. Run `npm install`
 1. Run `npm start`
@@ -34,15 +35,20 @@ Swagger is exposed on http://localhost:3004/api-docs
 # Installation using Docker
 1. Clone the repo
 1. Navigate into the restful-ecommerce root folder
+1. Create a `.env` file and copy the following contents in it:
+  ```
+  AUTH_USERNAME=admin
+  AUTH_PASSWORD=secretPass123
+  SECRET_KEY=Secret999$
+  ```
 1. Run `docker compose -f docker-compose-ecommerce.yml up -d` - This command will start the application in detached mode
 1. APIs are exposed on http://localhost:3004/
 1. Swagger is exposed on http://localhost:3004/api-docs
-
 1. Run `docker compose -f docker-compose-ecommerce.yml down` to stop the application.
 
 # Running the Unit Tests
 
-After running all the steps mentioned in the `Installation steps` section, the following command will execute all the unit-tests. (It is optional to run the unit tests, these tests are written using Super-Test) 
+After running all the steps mentioned in the `Installation steps` section, the following command will execute all the unit-tests. (It is optional to run the unit tests, these tests are written using SuperTest) 
 1. Run `npm run unit-test`
 
 ## Checkout the API Documentation on the [Wiki-Page](https://github.com/mfaisalkhatri/restful-ecommerce/wiki)
