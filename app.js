@@ -284,6 +284,20 @@ app.get("/getOrder", (req, res) => {
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     UpdateOrderResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Order updated successfully!
+ *         order:
+ *           $ref: '#/components/schemas/Order'
+ */
+
+/**
+ * @swagger
  * /updateOrder/{id}:
  *   put:
  *     summary: Update an order by ID
@@ -306,6 +320,10 @@ app.get("/getOrder", (req, res) => {
  *     responses:
  *       200:
  *         description: Order updated successfully!
+  *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UpdateOrderResponse'
  *       400:
  *         description: "Failed to authenticate token! \n\n
  *                       Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
@@ -350,6 +368,21 @@ app.put("/updateOrder/:id", authenticateToken, (req, res) => {
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     PartialUpdateOrderResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Order updated successfully!
+ *         order:
+ *           $ref: '#/components/schemas/Order'
+ */
+
+
+/**
+ * @swagger
  * /partialUpdateOrder/{id}:
  *   patch:
  *     summary: Partially update an order by ID
@@ -373,6 +406,10 @@ app.put("/updateOrder/:id", authenticateToken, (req, res) => {
  *     responses:
  *       200:
  *         description: Order updated successfully, updated order is returned in response.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/PartialUpdateOrderResponse'
  *       400:
  *         description: "Failed to authenticate token! \n\n
  *                       Invalid request, no data provided to update!"
@@ -428,7 +465,7 @@ app.patch("/partialUpdateOrder/:id", authenticateToken, (req, res) => {
  *         description: The ID of the order
  *     responses:
  *       204:
- *         description: Nothing is returned in response.
+ *         description: No content is returned in the response.
  *       400:
  *         description: Failed to authenticate token!
  *       403:
@@ -460,7 +497,7 @@ app.delete("/deleteOrder/:id", authenticateToken, (req, res, done) => {
  *       - bearerAuth: []
  *     responses:
  *       204:
- *         description: Nothing is returned in response.
+ *         description: No content is returned in the response.
  *       400:
  *         description: Failed to authenticate token!
  *       403:
@@ -485,6 +522,22 @@ app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     AuthResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Authentication successful!
+ *         token:
+ *           type: string
+ *           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ */
+
+
+/**
+ * @swagger
  * /auth:
  *   post:
  *     summary: Authenticate a user and return a JWT
@@ -506,6 +559,10 @@ app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
  *     responses:
  *       201:
  *         description: Authentication successful!, token returned
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
  *       400:
  *         description: Username and Password is required for authentication!
  *       401:
@@ -555,6 +612,27 @@ app.get("/swagger.json", (req, res) => {
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     HealthResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: string
+ *           example: Up and Running
+ *         uptime:
+ *           type: number
+ *           description: Server uptime in seconds
+ *           example: 123456
+ *         timestamp:
+ *           type: string
+ *           format: date-time
+ *           example: "2024-01-01T00:00:00.000Z"
+ */
+
+
+/**
+ * @swagger
  * /health:
  *   get:
  *     summary: Health check of the server
@@ -564,17 +642,7 @@ app.get("/swagger.json", (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: 'Up and Running'
- *                 uptime:
- *                   type: number
- *                   example: 123456
- *                 timestamp:
- *                   type: string
- *                   example: "2024-01-01T00:00:00.000Z"
+ *               $ref: '#/components/schemas/HealthResponse'
  *       500:
  *         description: Server is down
  */
@@ -621,6 +689,33 @@ const upload = multer({
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     ImageUploadResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: File uploaded successfully
+ *         file:
+ *           type: object
+ *           properties:
+ *             originalName:
+ *               type: string
+ *               description: Original name of the uploaded file
+ *               example: example.png
+ *             path:
+ *               type: string
+ *               description: Server path or URL where the file is stored
+ *               example: uploads/example_123456.png
+ *             size:
+ *               type: number
+ *               description: Size of the uploaded file in bytes
+ *               example: 45321
+ */
+
+/**
+ * @swagger
  * /imageUpload:
  *   post:
  *     summary: Upload an image file
@@ -638,32 +733,20 @@ const upload = multer({
  *               image:
  *                 type: string
  *                 format: binary
- *                 description: Image file to upload (jpg, jpeg, png)
+ *                 description: Image file to upload (JPG, JPEG, PNG only, max size 5MB)
  *     responses:
  *       200:
  *         description: File uploaded successfully
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 file:
- *                   type: object
- *                   properties:
- *                     originalName:
- *                       type: string
- *                     path:
- *                       type: string
- *                     size:
- *                       type: number
+ *               $ref: '#/components/schemas/ImageUploadResponse'
  *       400:
- *         description: Bad Request (Invalid file or file size exceeds 5MB)
+ *         description: Bad Request – Invalid file format or file size exceeds 5MB
  *       401:
- *         description: Unauthorized (Missing or invalid Bearer token)
+ *         description: Unauthorized – Missing or invalid Bearer token
  *       403:
- *         description: Forbidden (Invalid or expired token)
+ *         description: Forbidden – Invalid or expired token
  */
 app.post("/imageUpload", authenticateToken, (req, res) => {
   upload.single("image")(req, res, (err) => {
