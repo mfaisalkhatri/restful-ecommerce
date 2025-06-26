@@ -471,7 +471,7 @@ app.patch("/partialUpdateOrder/:id", authenticateToken, (req, res) => {
  *       403:
  *         description: Forbidden! Token is missing!
  *       404:
- *         description: No Order found with the given Order Id!!"
+ *         description: No Order found with the given Order Id!!
  */
 app.delete("/deleteOrder/:id", authenticateToken, (req, res, done) => {
   const id = parseInt(req.params.id);
