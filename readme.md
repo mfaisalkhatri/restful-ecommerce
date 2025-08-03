@@ -1,4 +1,4 @@
-![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
+[![Node.js CI](https://github.com/mfaisalkhatri/restful-ecommerce/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/mfaisalkhatri/restful-ecommerce/actions/workflows/node.js.yml) [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 # Restful E-Commerce
 
