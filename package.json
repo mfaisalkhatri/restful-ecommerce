@@ -31,6 +31,6 @@
     "supertest": "^7.1.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "wait-on": "^8.0.4"
+    "wait-on": "^8.0.5"
   }
 }
