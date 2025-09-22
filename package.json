@@ -25,12 +25,12 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^11.7.2",
-    "mochawesome": "^7.1.3",
+    "mochawesome": "^7.1.4",
     "multer": "^2.0.2",
     "path": "^0.12.7",
     "supertest": "^7.1.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "wait-on": "^8.0.5"
+    "wait-on": "^9.0.1"
   }
 }
