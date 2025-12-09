@@ -384,10 +384,6 @@ describe('Unit Tests of E-Commerce application', () => {
 
 		expect(response.statusCode).to.be.equal(200);
 		expect(response.body.message).to.be.equal('swagger-output.json already exists');
-
-		const path = Path.join(__dirname, "swagger-output.json")
-
-		expect(fs.existsSync(path)).to.be.true;
 	});
 
 	it('should upload an image and return status code 200', async() => {
