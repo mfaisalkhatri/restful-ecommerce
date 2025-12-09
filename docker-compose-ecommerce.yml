@@ -9,4 +9,5 @@ services:
     environment:
       - .env
     volumes:
-      - ./swagger-output.json:/restful-ecommerce-app/swagger-output.json
+      - ./:/app
+    working_dir: /app

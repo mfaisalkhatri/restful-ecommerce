@@ -591,7 +591,7 @@ app.post("/auth", (req, res) => {
 });
 
 app.get("/swagger.json", (req, res) => {
-  const swaggerPath = path.join(process.cwd(), "swagger-output.json");
+  const swaggerPath = "/app/swagger-output.json";
   const jsonContent = JSON.stringify(swaggerSpec, null, 2);
 
   if (!fs.existsSync(swaggerPath)) {
