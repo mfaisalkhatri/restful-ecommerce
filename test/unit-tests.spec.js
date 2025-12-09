@@ -362,16 +362,32 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.body.message).to.be.equal('No Order found with the given Order Id!');
 	});
 
+	
+
 	it('should generate swagger.json in the local dir successfully when /swagger.json endpoint is called', async()=> {
+		const path = Path.join(__dirname, "swagger-output.json");
+		
+  			if (fs.existsSync(path)) {
+			    fs.unlinkSync(path);
+  			}
+
+		let response = await request (baseurl).get('/swagger.json');
+
+		expect(response.statusCode).to.be.equal(201);
+		expect(response.body.message).to.be.equal('Swagger JSON file generated successfully');
+
+		expect(fs.existsSync(path)).to.be.true;
+	});
+
+		it('should generate not generate swagger.json in the local dir when /swagger.json endpoint is called and file already exists', async()=> {
 		let response = await request (baseurl).get('/swagger.json');
 
 		expect(response.statusCode).to.be.equal(200);
-		expect(response.body.message).to.be.equal('Swagger JSON file generated successfully');
+		expect(response.body.message).to.be.equal('swagger-output.json already exists');
 
 		const path = Path.join(__dirname, "swagger-output.json")
 
 		expect(fs.existsSync(path)).to.be.true;
-
 	});
 
 	it('should upload an image and return status code 200', async() => {
@@ -456,4 +472,5 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.statusCode).to.be.equal(404);
 		expect(response.body.message).to.be.equal('No orders available to delete!');
 		});
+
  });
