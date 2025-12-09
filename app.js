@@ -4,7 +4,7 @@ import fs from "fs";
 import multer from "multer";
 import path from "path";
 import { swaggerUi, swaggerSpec } from "./swagger.js";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 const uploadsDir = "uploads";
@@ -84,7 +84,7 @@ const authenticateToken = (req, res, next) => {
  *         total_amt:
  *           type: number
  *           description: The total amount for the order
- *    
+ *
  *     AddOrderResponse:
  *       type: object
  *       properties:
@@ -111,7 +111,7 @@ const authenticateToken = (req, res, next) => {
  *             type: array
  *             items:
  *               $ref: '#/components/schemas/Order'
- * 
+ *
  *     responses:
  *       201:
  *         description: Orders added successfully!, Added orders are returned in response
@@ -320,7 +320,7 @@ app.get("/getOrder", (req, res) => {
  *     responses:
  *       200:
  *         description: Order updated successfully!
-  *         content:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/UpdateOrderResponse'
@@ -379,7 +379,6 @@ app.put("/updateOrder/:id", authenticateToken, (req, res) => {
  *         order:
  *           $ref: '#/components/schemas/Order'
  */
-
 
 /**
  * @swagger
@@ -515,9 +514,7 @@ app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
   orders = [];
   nextOrderId = 1;
 
-  res
-    .status(204)
-    .send("All orders have been deleted successfully!");
+  res.status(204).send("All orders have been deleted successfully!");
 });
 
 /**
@@ -534,7 +531,6 @@ app.delete("/deleteAllOrders", authenticateToken, (req, res, done) => {
  *           type: string
  *           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  */
-
 
 /**
  * @swagger
@@ -595,18 +591,29 @@ app.post("/auth", (req, res) => {
 });
 
 app.get("/swagger.json", (req, res) => {
+  const swaggerPath = path.join(process.cwd(), "swagger-output.json");
   const jsonContent = JSON.stringify(swaggerSpec, null, 2);
 
-  fs.writeFile("swagger-output.json", jsonContent, "utf8", (err) => {
-    if (err) {
-      return res
-        .status(400)
-        .json({ message: "Error writing Swagger JSON file", error: err });
-    }
-    res.status(200).json({
-      message: "Swagger JSON file generated successfully",
-      swaggerSpec,
+  if (!fs.existsSync(swaggerPath)) {
+    fs.writeFile("swagger-output.json", jsonContent, "utf8", (err) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({
+            message: "Error writing Swagger JSON file",
+            error: err.toISOString,
+          });
+      }
+      res.status(201).json({
+        message: "Swagger JSON file generated successfully",
+        swaggerSpec,
+      });
     });
+    return;
+  }
+  return res.status(200).json({
+    message: "swagger-output.json already exists",
+    swaggerSpec,
   });
 });
 
@@ -629,7 +636,6 @@ app.get("/swagger.json", (req, res) => {
  *           format: date-time
  *           example: "2024-01-01T00:00:00.000Z"
  */
-
 
 /**
  * @swagger
