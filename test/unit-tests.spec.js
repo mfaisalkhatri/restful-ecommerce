@@ -167,7 +167,7 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.body.message).to.be.equal('No Order found with the given parameters!');	
 	});
 
-	it('should generate the valid token with status code 201 ', async() => {
+	it('should generate the valid token with status code 201', async() => {
 		let response = await request (baseurl).post('/auth').send(authCredentials);
 
 		expect(response.statusCode).to.be.equal(201);
@@ -176,7 +176,7 @@ describe('Unit Tests of E-Commerce application', () => {
 		token=response.body.token;
 	});
 
-	it('should not generate the token and return status code 401 when invalid credentials are supplied ', async() => {
+	it('should not generate the token and return status code 401 when invalid credentials are supplied', async() => {
 		let response = await request (baseurl).post('/auth').send({username: "admin", password: "Password123"});
 
 		expect(response.statusCode).to.be.equal(401);
@@ -275,7 +275,7 @@ describe('Unit Tests of E-Commerce application', () => {
 
 	});
 
-	it('should update the order partially and return status code 200 ', async() => {
+	it('should update the order partially and return status code 200', async() => {
 		let response = await request (baseurl).patch('/partialUpdateOrder/2')
 		.set('Content-Type', 'application/json')
 		.set('Authorization', token)
@@ -455,6 +455,5 @@ describe('Unit Tests of E-Commerce application', () => {
 
 		expect(response.statusCode).to.be.equal(404);
 		expect(response.body.message).to.be.equal('No orders available to delete!');
-	});
-
+		});
  });

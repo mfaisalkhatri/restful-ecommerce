@@ -8,3 +8,5 @@ services:
       - 3004:3004
     environment:
       - .env
+    volumes:
+      - ./swagger-output.json:/restful-ecommerce-app/swagger-output.json
