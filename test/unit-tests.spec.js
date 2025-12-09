@@ -167,7 +167,7 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.body.message).to.be.equal('No Order found with the given parameters!');	
 	});
 
-	it('should generate the valid token with status code 201 ', async() => {
+	it('should generate the valid token with status code 201', async() => {
 		let response = await request (baseurl).post('/auth').send(authCredentials);
 
 		expect(response.statusCode).to.be.equal(201);
@@ -176,7 +176,7 @@ describe('Unit Tests of E-Commerce application', () => {
 		token=response.body.token;
 	});
 
-	it('should not generate the token and return status code 401 when invalid credentials are supplied ', async() => {
+	it('should not generate the token and return status code 401 when invalid credentials are supplied', async() => {
 		let response = await request (baseurl).post('/auth').send({username: "admin", password: "Password123"});
 
 		expect(response.statusCode).to.be.equal(401);
@@ -275,7 +275,7 @@ describe('Unit Tests of E-Commerce application', () => {
 
 	});
 
-	it('should update the order partially and return status code 200 ', async() => {
+	it('should update the order partially and return status code 200', async() => {
 		let response = await request (baseurl).patch('/partialUpdateOrder/2')
 		.set('Content-Type', 'application/json')
 		.set('Authorization', token)
@@ -362,16 +362,28 @@ describe('Unit Tests of E-Commerce application', () => {
 		expect(response.body.message).to.be.equal('No Order found with the given Order Id!');
 	});
 
+	
+
 	it('should generate swagger.json in the local dir successfully when /swagger.json endpoint is called', async()=> {
+		const path = Path.join(__dirname, "swagger-output.json");
+		
+  			if (fs.existsSync(path)) {
+			    fs.unlinkSync(path);
+  			}
+
+		let response = await request (baseurl).get('/swagger.json');
+
+		expect(response.statusCode).to.be.equal(201);
+		expect(response.body.message).to.be.equal('Swagger JSON file generated successfully');
+
+		expect(fs.existsSync(path)).to.be.true;
+	});
+
+		it('should generate not generate swagger.json in the local dir when /swagger.json endpoint is called and file already exists', async()=> {
 		let response = await request (baseurl).get('/swagger.json');
 
 		expect(response.statusCode).to.be.equal(200);
-		expect(response.body.message).to.be.equal('Swagger JSON file generated successfully');
-
-		const path = Path.join(__dirname, "swagger-output.json")
-
-		expect(fs.existsSync(path)).to.be.true;
-
+		expect(response.body.message).to.be.equal('swagger-output.json already exists');
 	});
 
 	it('should upload an image and return status code 200', async() => {
@@ -455,6 +467,6 @@ describe('Unit Tests of E-Commerce application', () => {
 
 		expect(response.statusCode).to.be.equal(404);
 		expect(response.body.message).to.be.equal('No orders available to delete!');
-	});
+		});
 
  });
