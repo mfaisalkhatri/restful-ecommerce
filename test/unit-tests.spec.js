@@ -365,7 +365,7 @@ describe('Unit Tests of E-Commerce application', () => {
 	
 
 	it('should generate swagger.json in the local dir successfully when /swagger.json endpoint is called', async()=> {
-		const path = "/app/swagger-output.json");
+		const path = ("./swaggerfiles/swagger-output.json");
 		
   			if (fs.existsSync(path)) {
 			    fs.unlinkSync(path);

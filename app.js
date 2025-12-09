@@ -591,17 +591,29 @@ app.post("/auth", (req, res) => {
 });
 
 app.get("/swagger.json", (req, res) => {
-  const swaggerPath = "/app/swagger-output.json";
-  const jsonContent = JSON.stringify(swaggerSpec, null, 2);
+  const appDir = "./swaggerfiles";
+  const swaggerPath = path.join(appDir, "swagger-output.json");
 
+  const jsonContent = JSON.stringify(swaggerSpec, null, 2);
+  
+if (!fs.existsSync(appDir)) {
+    fs.mkdirSync(appDir, { recursive: true }, (err) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Error creating swaggerfiles directory",
+          error: err.message,
+        });
+      }
+    });
+  }
   if (!fs.existsSync(swaggerPath)) {
-    fs.writeFile("swagger-output.json", jsonContent, "utf8", (err) => {
+    fs.writeFile(swaggerPath, jsonContent, "utf8", (err) => {
       if (err) {
         return res
           .status(400)
           .json({
             message: "Error writing Swagger JSON file",
-            error: err.toISOString,
+            error: err.message,
           });
       }
       res.status(201).json({
