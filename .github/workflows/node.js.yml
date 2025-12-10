@@ -14,7 +14,7 @@ on:
       - issue-*
 jobs:
   Build_App_using_node_and_Run_Tests:
-    name: Build Service using node and run unit tests
+    name: Build Service using Node and run unit tests
 
     runs-on: ubuntu-latest
     permissions:
@@ -32,7 +32,15 @@ jobs:
     - name: Install the dependencies
       run: npm ci
 
-    - name: Build the app and run the tests
+    - name: Create .env from secrets
+      run: |
+        cat > .env <<'EOF'
+        AUTH_USERNAME=${{ secrets.AUTH_USERNAME }}
+        AUTH_PASSWORD=${{ secrets.AUTH_PASSWORD }}
+        SECRET_KEY=${{ secrets.SECRET_KEY }}
+        EOF
+
+    - name: Start the app in Background and Wait for Server to be available
       run: npm start && npx wait-on http://localhost:3004 & 
 
     - name: Run the tests
@@ -49,7 +57,7 @@ jobs:
           path: ${{ github.workspace }}/reports/test-results.json
           reporter: 'mocha-json'
 
-  Build_App_Docker_Compose_and_Run_Tes:
+  Build_App_Docker_Compose_and_Run_Test:
     name: Build Service using Docker Compose and run unit tests
 
     runs-on: ubuntu-latest
@@ -68,11 +76,23 @@ jobs:
     - name: Install the dependencies
       run: npm ci
 
+    - name: Create .env from secrets
+      run: |
+        cat > .env <<'EOF'
+        AUTH_USERNAME=${{ secrets.AUTH_USERNAME }}
+        AUTH_PASSWORD=${{ secrets.AUTH_PASSWORD }}
+        SECRET_KEY=${{ secrets.SECRET_KEY }}
+        EOF
+
     - name: Start the service using Docker Compose
       run: docker compose -f docker-compose-ecommerce.yml up -d
+    
+    - name: Wait for service to be available
+      run: npx wait-on http://localhost:3004 &
 
     - name: Run the unit tests
       run: npm run unit-test
 
     - name: Stop the service
+      if: always()
       run: docker compose -f docker-compose-ecommerce.yml down --remove-orphans

@@ -26,9 +26,9 @@ Swagger is exposed on http://localhost:3004/api-docs
 ## Importing the API Collection into Postman
 
 1. Visit `http://localhost:3004/swagger.json` to generate and download the Swagger JSON file
-1. The Swagger JSON file will be saved as `swagger-output.json` in your project directory
+1. The Swagger JSON file will be saved as `swagger-output.json` in the `/swaggerfiles` directory
 1. Open `Postman` app and click on `Import`
-1. Select file `swagger-output.json` from the root folder of the project
+1. Select file `/swagger-output.json` from the `/swaggerfiles` folder
 1. Select `OpenAPI 3.0 with a Postman Collection` and click on `Import`
 1. All the Available APIs will be imported in Postman and can be used for testing
 
@@ -74,6 +74,10 @@ After running all the steps mentioned in the `Installation steps` section, the f
 - [How to test PATCH requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-patch-requests-f6b0867d91e7)
 - [How to test DELETE requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-delete-requests-2ff77feb0383)
 - [How to Create a Custom Logger for Logging Response Details with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-creating-custom-logger-for-logging-response-details-771e961d9faa)
+- [How to Test POST Requests with Rest-Assured Java for API Testing: Part I](https://medium.com/javarevisited/how-to-test-post-requests-with-rest-assured-for-api-testing-part-i-d697efab5875)
+- [How to Test POST Requests with Rest-Assured Java for API Testing: Part II](https://medium.com/javarevisited/how-to-test-post-requests-with-rest-assured-java-for-api-testing-part-ii-30dfe04a533a)
+- [How to test a SOAP API request with Rest-Assured Java](https://medium.com/javarevisited/how-to-test-a-soap-api-request-with-rest-assured-java-c7fbab845c46)
+- [How to Perform Response Verification in REST-Assured Java for API Testing](https://medium.com/javarevisited/how-to-perform-response-verification-in-rest-assured-java-for-api-testing-666583f58334)
 - [Postman Learning Center](https://learning.postman.com/)
 - [Automating your API tests with REST Assured](https://testautomationu.applitools.com/automating-your-api-tests-with-rest-assured/)
 - [How to perform End to End API Testing using Playwright with Java and TestNG](https://medium.com/@iamfaisalkhatri/how-to-perform-end-to-end-api-testing-using-playwright-with-java-and-testng-26b318927115)
