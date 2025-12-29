@@ -19,7 +19,7 @@
   "author": "Faisal Khatri",
   "license": "ISC",
   "dependencies": {
-    "chai": "^6.2.1",
+    "chai": "^6.2.2",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "fs": "^0.0.1-security",
