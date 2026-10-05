@@ -123,7 +123,7 @@ const authenticateToken = (req, res, next) => {
  *         description: "Request Payload must be an array of orders! \n\n
  *                       Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!"
  */
-app.post("/addOrder", (req, res) => {
+app.post("/addOrder", authenticateToken, (req, res) => {
   const orderArray = req.body;
 
   if (!Array.isArray(orderArray)) {
@@ -189,7 +189,7 @@ app.post("/addOrder", (req, res) => {
  *       404:
  *         description: No order found!!
  */
-app.get("/getAllOrders", (req, res) => {
+app.get("/getAllOrders", authenticateToken, (req, res) => {
   if (orders.length > 0) {
     res.status(200).json({
       message: "Orders fetched successfully!",
@@ -247,7 +247,7 @@ app.get("/getAllOrders", (req, res) => {
  *       404:
  *         description: No order found with the given parameters!
  */
-app.get("/getOrder", (req, res) => {
+app.get("/getOrder", authenticateToken, (req, res) => {
   const { id, user_id, product_id } = req.query;
 
   let filteredOrders = orders;
