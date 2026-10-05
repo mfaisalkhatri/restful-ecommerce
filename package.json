@@ -19,18 +19,18 @@
   "author": "Faisal Khatri",
   "license": "ISC",
   "dependencies": {
-    "chai": "^6.2.2",
-    "dotenv": "^18.0.3",
+    "chai": "^6.3.0",
+    "dotenv": "^18.0.5",
     "express": "^5.2.1",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.3",
-    "mocha": "^12.0.2",
+    "mocha": "^12.0.3",
     "mochawesome": "^8.1.1",
     "multer": "^2.4.0",
     "path": "^0.12.7",
     "supertest": "^7.3.0",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1",
-    "wait-on": "^9.1.0"
+    "wait-on": "^9.5.1"
   }
 }
